@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "169820721988",
+    "project_id": "trendy-movies",
+    "storage_bucket": "trendy-movies.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169820721988:android:862590a9a897436ef23d11",
+        "android_client_info": {
+          "package_name": "com.modi.trendymovies.terndy_movies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169820721988-gbjncgk6lihgl4lu366rb21qnftslrmf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8jCxrO8q9NBVjmOXhWxFi2jsd8IccFps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169820721988-gbjncgk6lihgl4lu366rb21qnftslrmf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -23,6 +23,7 @@ dependencies:
 
   core:
     path: core
+  lints: ^1.0.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -37,7 +38,6 @@ dev_dependencies:
   hive_generator: ^1.1.0
   freezed_annotation: ^0.14.3
   build_runner: ^2.1.1
-  lints: ^1.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

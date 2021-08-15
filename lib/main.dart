@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/login/logic/login_controller.dart';
+import 'package:terndy_movies/dependencies_container.dart';
+import 'package:terndy_movies/home/home_screen.dart';
+
+import 'login/logic/login_screen_bindings.dart';
+import 'login/ui/login_screen.dart';
 
 void main() async {
-  await setupDeps();
+  await DependenciesContainer().onAppLaunch();
   runApp(MyApp());
 }
 
-Future<void> setupDeps() async {
-  Get..put(AuthService());
-  return;
-}
-
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget with BaseToolBox {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(getPages: [
       GetPage(
           name: '/',
           page: () {
-            return box.hasData('token') ? Home() : Login();
-          })
+            return authService.hasLoggedIn ? HomeScreen() : LoginScreen();
+          },
+          bindings: [
+            if (!authService.hasLoggedIn) LoginScreenBindings(),
+          ])
     ]);
   }
 }
