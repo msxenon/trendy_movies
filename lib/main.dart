@@ -14,15 +14,20 @@ void main() async {
 class MyApp extends StatelessWidget with BaseToolBox {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(getPages: [
-      GetPage(
-          name: '/',
-          page: () {
-            return authService.hasLoggedIn ? HomeScreen() : LoginScreen();
-          },
-          bindings: [
-            if (!authService.hasLoggedIn) LoginScreenBindings(),
-          ])
-    ]);
+    return GetMaterialApp(
+      getPages: [
+        GetPage(
+            name: '/',
+            page: () {
+              return authService.hasLoggedIn ? HomeScreen() : LoginScreen();
+            },
+            bindings: [
+              authService.hasLoggedIn
+                  ? HomeScreenBindings()
+                  : LoginScreenBindings(),
+            ])
+      ],
+      enableLog: true,
+    );
   }
 }

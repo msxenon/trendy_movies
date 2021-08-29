@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:terndy_movies/dependencies_container.dart';
@@ -9,8 +10,19 @@ class AuthService extends GetxService with BaseToolBox {
   final RxBool _hasLoggedIn = false.obs;
   bool get hasLoggedIn => _hasLoggedIn.value;
   User? _user;
+  User get user => _user!;
+  @override
+  void onInit() {
+    ever(_hasLoggedIn, (_) {
+      // Get.offNamed(
+      //   '/',
+      // );
+    });
+    _onAppLaunch();
+    super.onInit();
+  }
 
-  void onAppLaunch() async {
+  void _onAppLaunch() async {
     _hasLoggedIn.value =
         database.anonymousBox.get(LoginConstants.tokenKey) != null;
 
@@ -21,23 +33,39 @@ class AuthService extends GetxService with BaseToolBox {
         _hasLoggedIn(false);
         print('User is currently signed out!');
       } else {
+        database.anonymousBox.put(LoginConstants.tokenKey, user!.uid);
         print('User is signed in!');
       }
     });
   }
 
-  Future<void> register(String email, String password) async {
+  Future<Either<String, bool>> register(String email, String password) async {
     try {
-      UserCredential userCredential = await _auth
-          .createUserWithEmailAndPassword(email: email, password: password);
+      await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      return Right(true);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        return Left('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        return Left('The account already exists for that email.');
+      } else {
+        return Left(e.message ?? e.code);
       }
     } catch (e) {
-      print(e);
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, bool>> login(String email, String password) async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+
+      return Right(true);
+    } on FirebaseAuthException catch (e) {
+      return Left(e.message ?? e.code);
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 }

@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.modi.trendymovies.terndy_movies">
-   <application
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
         android:label="terndy_movies"
         android:icon="@mipmap/ic_launcher">
         <activity

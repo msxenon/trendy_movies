@@ -13,11 +13,18 @@ class LoginScreen extends StatelessWidget {
               shrinkWrap: true,
               children: [
                 TextField(
-                  controller: controller.emailController,
-                ),
+                    controller: controller.emailController,
+                    decoration: InputDecoration(
+                      hintText: 'Email',
+                      errorText: controller.validateEmail(),
+                    )),
                 TextField(
-                  controller: controller.passwordController,
-                ),
+                    controller: controller.passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      hintText: 'Password',
+                      errorText: controller.validatePassword(),
+                    )),
                 ElevatedButton(
                     onPressed: controller.register, child: Text('login'))
               ],

@@ -176,6 +176,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.3"
+  dartz:
+    dependency: "direct main"
+    description:
+      name: dartz
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.10.0"
   fake_async:
     dependency: transitive
     description:
@@ -251,6 +258,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_swipecards:
+    dependency: "direct main"
+    description:
+      name: flutter_swipecards
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -262,14 +276,14 @@ packages:
     source: sdk
     version: "0.0.0"
   freezed:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: freezed
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.14.5"
   freezed_annotation:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: freezed_annotation
       url: "https://pub.dartlang.org"
@@ -360,14 +374,21 @@ packages:
     source: hosted
     version: "0.6.3"
   json_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.0"
-  lints:
+  json_serializable:
     dependency: "direct main"
+    description:
+      name: json_serializable
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.0"
+  lints:
+    dependency: "direct dev"
     description:
       name: lints
       url: "https://pub.dartlang.org"
