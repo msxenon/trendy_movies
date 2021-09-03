@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/login/logic/login_controller.dart';
+import 'package:terndy_movies/presentation/login/logic/login_controller.dart';
 
 class LoginScreen extends StatelessWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +28,7 @@ class LoginScreen extends StatelessWidget {
                       errorText: controller.validatePassword(),
                     )),
                 ElevatedButton(
-                    onPressed: controller.register, child: Text('login'))
+                    onPressed: controller.register, child: const Text('login'))
               ],
             ),
           );

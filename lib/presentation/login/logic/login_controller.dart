@@ -15,7 +15,8 @@ class LoginController extends GetxController with BaseToolBox {
     if (!validateLogin()) {
       return Future.value();
     }
-    return _register(emailController.text, passwordController.text);
+    return authService.registerWithEmail(
+        email: emailController.text, password: passwordController.text);
   }
 
   Future<void> login() {
@@ -24,25 +25,12 @@ class LoginController extends GetxController with BaseToolBox {
     if (!validateLogin()) {
       return Future.value();
     }
-    return _login(emailController.text, passwordController.text);
-  }
-
-  Future<void> _register(String email, String password) async {
-    final registerFuture = await authService.register(email, password);
-    registerFuture.fold(
-        (l) => Get.snackbar('Err', l), (r) => _login(email, password));
-    return;
+    return authService.signInWithEmail(
+        email: emailController.text, password: passwordController.text);
   }
 
   bool validateLogin() {
     return validateEmail() == null && validatePassword() == null;
-  }
-
-  Future<void> _login(String email, String password) async {
-    final registerFuture = await authService.login(email, password);
-    registerFuture.fold(
-        (l) => Get.snackbar('Err', l), (r) => print('all is good'));
-    return;
   }
 
   String? validatePassword() {
@@ -50,7 +38,7 @@ class LoginController extends GetxController with BaseToolBox {
       return null;
     }
     if (passwordController.text.isEmpty) {
-      return "Password should not be empty";
+      return 'Password should not be empty';
     }
     return null;
   }
@@ -60,7 +48,7 @@ class LoginController extends GetxController with BaseToolBox {
       return null;
     }
     if (!emailController.text.isEmail) {
-      return "Wrong email pattern";
+      return 'Wrong email pattern';
     }
     return null;
   }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swipecards/flutter_swipecards.dart';
 import 'package:get/get.dart';
+import 'package:terndy_movies/home/domain/entity/movies_page_model.dart';
 import 'package:terndy_movies/home/trendy_movies_page.dart';
 import 'package:terndy_movies/movies/movies_service.dart';
-
-import 'domain/entity/movies_page_model.dart';
 
 class HomeController extends GetxController with StateMixin<MoviesPageModel> {
   HomeController({required this.homeRepository});
@@ -80,7 +79,7 @@ class HomeController extends GetxController with StateMixin<MoviesPageModel> {
       return Get.find<MovieCardController>(
           tag: state!.results[index.value].id.toString());
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return null;
     }
   }

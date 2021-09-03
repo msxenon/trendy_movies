@@ -14,10 +14,11 @@ abstract class IHomeProvider {
 class HomeProvider extends GetConnect implements IHomeProvider {
   @override
   void onInit() {
-    httpClient.defaultDecoder =
-        (val) => MoviesPageModel.fromJson(val as Map<String, dynamic>);
-    httpClient.baseUrl =
-        'https://api.themoviedb.org/3/trending/all/day?api_key=269cf15030b5a2d4f1a34c35b720202f';
+    httpClient
+      ..baseUrl =
+          'https://api.themoviedb.org/3/trending/all/day?api_key=269cf15030b5a2d4f1a34c35b720202f'
+      ..defaultDecoder = (dynamic val) =>
+          MoviesPageModel.fromJson(val as Map<String, dynamic>);
   }
 
   @override
@@ -31,7 +32,6 @@ class HomeRepository implements IHomeRepository {
   @override
   Future<MoviesPageModel> getCases() async {
     final cases = await provider.getCases();
-    print('xxx ${cases.statusText} == ${cases.body}');
 
     if (cases.status.hasError) {
       return Future.error(cases.statusText!);

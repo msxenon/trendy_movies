@@ -1,1 +1,16 @@
-include: package:lints/recommended.yaml
+include: package:very_good_analysis/analysis_options.2.3.0.yaml
+linter:
+  rules:
+    public_member_api_docs: false
+    sort_pub_dependencies: false
+
+analyzer:
+  exclude:
+    - 'example/**'
+    - lib/**/*.g.dart
+    - lib/**/**/*.g.dart
+    - lib/**/**/**/*.g.dart
+    - lib/*.g.dart
+    - lib/**/*.freezed.dart
+    - lib/vendor/**
+    - test/_data/**/*.dart
