@@ -27,6 +27,30 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+<!-- ADD THIS BEFORE YOUR main.dart.js SCRIPT -->
+
+<!-- The core Firebase JS SDK (always required for using any Firebase service) -->
+<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+<!-- Firebase Auth SDK -->
+<script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-auth.js"></script>
+<script>
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+  apiKey: "AIzaSyBFoVpN4z9xP1jB-VtepwxuZ_31OMrhzpk",
+  authDomain: "trendy-movies.firebaseapp.com",
+  projectId: "trendy-movies",
+  storageBucket: "trendy-movies.appspot.com",
+  messagingSenderId: "169820721988",
+  appId: "1:169820721988:web:fb14232dd5e149d4f23d11",
+  measurementId: "G-DXEMP13C9W"
+};
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig)
+    </script>
+<!-- END OF FIREBASE INIT CODE -->
+
+<script src="main.dart.js" type="application/javascript"></script>
+
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->

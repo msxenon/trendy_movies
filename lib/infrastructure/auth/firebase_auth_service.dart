@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:terndy_movies/application/utils/nav_utils.dart';
 import 'package:terndy_movies/domain/auth/auth_failure.dart';
 import 'package:terndy_movies/domain/auth/auth_user_model.dart';
 import 'package:terndy_movies/domain/auth/i_auth_service.dart';
@@ -60,6 +61,7 @@ class FirebaseAuthService extends AuthService {
   Future<void> signOut() async {
     await _auth.signOut();
     await super.signOut();
+    NavUtils.loadFromMainRoute();
   }
 
   @override

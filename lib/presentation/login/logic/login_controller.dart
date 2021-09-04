@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:terndy_movies/application/utils/nav_utils.dart';
 import 'package:terndy_movies/domain/auth/auth_failure.dart';
 import 'package:terndy_movies/domain/base_dependency_container.dart';
 
@@ -14,9 +15,11 @@ extension LoginViewStateExts on LoginViewState {
 
 class LoginController extends GetxController with BaseToolBox {
   final Rx<LoginViewState> viewState = LoginViewState.login.obs;
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController emailController =
+      TextEditingController(text: 'modi@modi-domain.com');
   final TextEditingController displayNameController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController passwordController =
+      TextEditingController(text: '12345678');
   Future<Either<AuthFailure, void>> register() {
     update();
     if (!_validateRegister()) {
@@ -88,8 +91,7 @@ class LoginController extends GetxController with BaseToolBox {
     }
 
     result.fold(_onError, (r) {
-      Get.offAndToNamed<void>('/');
-      debugPrint('xxxx loginSuccess');
+      NavUtils.loadFromMainRoute();
       return;
     });
   }
