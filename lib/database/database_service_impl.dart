@@ -6,11 +6,6 @@ class DatabaseServiceImpl extends DatabaseService {
   late Box<Map<String, dynamic>>? _anonymousBox;
   Box<Map<String, dynamic>> get anonymousBox => _anonymousBox!;
   static const _userModelKey = 'userModel';
-  Future<void> initApp() async {
-    await Hive.initFlutter();
-    _anonymousBox = await Hive.openBox<Map<String, dynamic>>('anonymous_box');
-    return;
-  }
 
   @override
   Future<AuthUserModel> restoreUserAuth() async {
@@ -24,5 +19,12 @@ class DatabaseServiceImpl extends DatabaseService {
   @override
   Future<void> saveUserAuth(AuthUserModel userAuthModel) {
     return anonymousBox.put(_userModelKey, userAuthModel.toJson());
+  }
+
+  @override
+  Future<void> initDb() async {
+    await Hive.initFlutter();
+    _anonymousBox = await Hive.openBox<Map<String, dynamic>>('anonymous_box');
+    return;
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/dependencies_container.dart';
+import 'package:terndy_movies/domain/base_dependency_container.dart';
 
 enum LoginViewState { login, register, reset }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:terndy_movies/dependencies_container.dart';
+import 'package:terndy_movies/domain/base_dependency_container.dart';
 import 'package:terndy_movies/home/home_screen.dart';
 import 'package:terndy_movies/presentation/login/logic/login_screen_bindings.dart';
 import 'package:terndy_movies/presentation/login/ui/login_screen.dart';
@@ -10,7 +11,9 @@ void main() {
 }
 
 Future<void> _startUp() async {
-  await DependenciesContainer().onAppLaunch();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await DependenciesContainer().setupMainServices();
   runApp(const MyApp());
 }
 

@@ -5,13 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:terndy_movies/domain/auth/auth_failure.dart';
 import 'package:terndy_movies/domain/auth/auth_user_model.dart';
-import 'package:terndy_movies/domain/database.dart';
+import 'package:terndy_movies/domain/base_service.dart';
 
-abstract class AuthService extends GetxService {
+abstract class AuthService extends BaseService {
   //Notifies when the authentication status changes.
   Rx<AuthUserModel> get authStateChanges =>
       const AuthUserModel.notLoggedIn().obs;
-  late final DatabaseService database;
   bool get isLoggedIn =>
       authStateChanges.value != const AuthUserModel.notLoggedIn();
   //Logs out from the service.
