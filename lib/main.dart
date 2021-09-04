@@ -14,9 +14,7 @@ void main() {
 }
 
 Future<void> _startUp() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  await DependenciesContainer().setupMainServices();
+  await DependenciesContainer().init();
   runApp(const MyApp());
 }
 

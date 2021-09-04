@@ -78,7 +78,6 @@ abstract class AuthService extends BaseService {
   @mustCallSuper
   Future<Either<AuthFailure, String>> onSignInSuccess(AuthUserModel r) async {
     authStateChanges(r);
-    debugPrint('xxx ${r.toJson()} == $isLoggedIn');
 
     return const Right('Done');
   }

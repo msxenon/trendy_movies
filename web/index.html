@@ -34,18 +34,25 @@
 <!-- Firebase Auth SDK -->
 <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-auth.js"></script>
 <script>
-      // Your web app's Firebase configuration
+ //Here my_dart_var is undefined
+
+    document.addEventListener("secret_data_loaded", function (){
+      //Here my_dart_var is defined
+       console.log(`secret_data_loaded`);
+           // Your web app's Firebase configuration
       const firebaseConfig = {
-  apiKey: "AIzaSyBFoVpN4z9xP1jB-VtepwxuZ_31OMrhzpk",
-  authDomain: "trendy-movies.firebaseapp.com",
-  projectId: "trendy-movies",
-  storageBucket: "trendy-movies.appspot.com",
-  messagingSenderId: "169820721988",
-  appId: "1:169820721988:web:fb14232dd5e149d4f23d11",
-  measurementId: "G-DXEMP13C9W"
+  apiKey: window.apiKey,
+  authDomain: window.authDomain,
+  projectId: window.projectId,
+  storageBucket: window.storageBucket,
+  messagingSenderId: window.messagingSenderId,
+  appId: window.appId,
+  measurementId: window.measurementId
 };
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig)
+    });
+
     </script>
 <!-- END OF FIREBASE INIT CODE -->
 

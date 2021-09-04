@@ -6,6 +6,12 @@ import 'package:terndy_movies/domain/database.dart';
 abstract class BaseDependencyInjector {
   InstanceBuilderCallback<DatabaseService> get databaseService;
   InstanceBuilderCallback<AuthService> get authService;
+  @required
+  @mustCallSuper
+  Future<void> init() async {
+    await setupMainServices();
+    return;
+  }
 
   @mustCallSuper
   Future<void> setupMainServices() async {
