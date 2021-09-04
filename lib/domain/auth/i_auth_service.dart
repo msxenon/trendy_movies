@@ -9,14 +9,13 @@ import 'package:terndy_movies/domain/base_service.dart';
 
 abstract class AuthService extends BaseService {
   //Notifies when the authentication status changes.
-  Rx<AuthUserModel> get authStateChanges =>
-      const AuthUserModel.notLoggedIn().obs;
-  bool get isLoggedIn =>
-      authStateChanges.value != const AuthUserModel.notLoggedIn();
+  Rx<AuthUserModel> authStateChanges = _notLoggedIn.obs;
+  bool get isLoggedIn => authStateChanges.value != _notLoggedIn;
+  static const _notLoggedIn = AuthUserModel.notLoggedIn();
   //Logs out from the service.
   @mustCallSuper
   Future<void> signOut() async {
-    authStateChanges(const AuthUserModel.notLoggedIn());
+    authStateChanges(_notLoggedIn);
   }
 
   @override
@@ -27,7 +26,7 @@ abstract class AuthService extends BaseService {
 
   @mustCallSuper
   Future<void> onLaunch() async {
-    authStateChanges(await database.restoreUserAuth());
+    authStateChanges(database.restoreUserAuth());
   }
 
   @protected
@@ -36,12 +35,24 @@ abstract class AuthService extends BaseService {
     required String password,
   });
   @protected
+  Future<Either<AuthFailure, AuthUserModel>> signInWithTokenExc({
+    required String token,
+  });
+  Future<Either<AuthFailure, String>> signInWithToken({
+    required String token,
+  }) async {
+    final user = await signInWithTokenExc(token: token);
+    return user.fold((l) => Left(l), onSignInSuccess);
+  }
+
+  @protected
   Future<Either<AuthFailure, AuthUserModel>> registerWithEmailExc({
     required String email,
     required String password,
+    required String displayName,
   });
   @mustCallSuper
-  Future<Either<AuthFailure, void>> signInWithEmail({
+  Future<Either<AuthFailure, String>> signInWithEmail({
     required String email,
     required String password,
   }) async {
@@ -51,18 +62,24 @@ abstract class AuthService extends BaseService {
   }
 
   @mustCallSuper
-  Future<Either<AuthFailure, void>> registerWithEmail({
+  Future<Either<AuthFailure, String>> registerWithEmail({
     required String email,
     required String password,
+    required String displayName,
   }) async {
-    final register =
-        await registerWithEmailExc(email: email, password: password);
+    final register = await registerWithEmailExc(
+      email: email,
+      password: password,
+      displayName: displayName,
+    );
     return register.fold((l) => Left(l), onSignInSuccess);
   }
 
   @mustCallSuper
-  FutureOr<Either<AuthFailure, void>> onSignInSuccess(AuthUserModel r) {
-    authStateChanges(const AuthUserModel.notLoggedIn());
-    return Future.value();
+  Future<Either<AuthFailure, String>> onSignInSuccess(AuthUserModel r) async {
+    authStateChanges(r);
+    debugPrint('xxx ${r.toJson()} == $isLoggedIn');
+
+    return const Right('Done');
   }
 }

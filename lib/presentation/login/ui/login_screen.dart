@@ -14,21 +14,39 @@ class LoginScreen extends StatelessWidget {
             child: ListView(
               shrinkWrap: true,
               children: [
-                TextField(
-                    controller: controller.emailController,
+                if (controller.viewState.value.isRegister)
+                  TextField(
+                    controller: controller.displayNameController,
                     decoration: InputDecoration(
-                      hintText: 'Email',
-                      errorText: controller.validateEmail(),
-                    )),
+                      hintText: 'Display name',
+                      errorText: controller.validateDisplayName(),
+                    ),
+                  ),
                 TextField(
-                    controller: controller.passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      errorText: controller.validatePassword(),
-                    )),
+                  controller: controller.emailController,
+                  decoration: InputDecoration(
+                    hintText: 'Email',
+                    errorText: controller.validateEmail(),
+                  ),
+                ),
+                TextField(
+                  controller: controller.passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: 'Password',
+                    errorText: controller.validatePassword(),
+                  ),
+                ),
                 ElevatedButton(
-                    onPressed: controller.register, child: const Text('login'))
+                    onPressed: controller.submit,
+                    child: controller.viewState.value.isLogin
+                        ? const Text('Login')
+                        : const Text('Register')),
+                ElevatedButton(
+                    onPressed: controller.toggleLogin,
+                    child: controller.viewState.value.isLogin
+                        ? const Text('is not registered?')
+                        : const Text('is already registered?'))
               ],
             ),
           );
