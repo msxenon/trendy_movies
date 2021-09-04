@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget with BaseToolBox {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       onGenerateTitle: (_) => _generateTitle(),
+      logWriterCallback: logger.logWriter,
       getPages: [
         GetPage<void>(
             name: AppRoutes.mainRoute,

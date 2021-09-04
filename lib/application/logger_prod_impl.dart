@@ -10,4 +10,10 @@ class LoggerProdImpl extends Logger {
 
   @override
   void error(Object error, [StackTrace? stackTrace, String? message]) {}
+
+  @override
+  void info(String message) {}
+
+  @override
+  void logWriter(String text, {bool? isError}) {}
 }

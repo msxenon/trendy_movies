@@ -2,7 +2,7 @@ import 'package:loggy/loggy.dart';
 import 'package:terndy_movies/domain/logger.dart';
 
 class LoggerDevImpl extends Logger {
-  late final _logger = GlobalLoggy().loggy;
+  late final _logger = Loggy<GlobalLoggy>('Dev');
   @override
   void onInit() {
     Loggy.initLoggy(
@@ -18,5 +18,19 @@ class LoggerDevImpl extends Logger {
   @override
   void error(Object error, [StackTrace? stackTrace, String? message]) {
     _logger.error(message, error, stackTrace);
+  }
+
+  @override
+  void logWriter(String text, {bool? isError}) {
+    if (isError == true) {
+      _logger.warning(error);
+    } else {
+      info(text);
+    }
+  }
+
+  @override
+  void info(String message) {
+    _logger.info(message);
   }
 }
