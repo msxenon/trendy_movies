@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:terndy_movies/application/utils/nav_utils.dart';
 import 'package:terndy_movies/domain/auth/auth_failure.dart';
 import 'package:terndy_movies/domain/auth/auth_user_model.dart';
@@ -48,7 +47,7 @@ class FirebaseAuthService extends AuthService {
         AuthFailure.custom(e.message ?? e.code),
       );
     } catch (e, s) {
-      debugPrint('$e $s');
+      logger.error(e, s);
       return Left(
         AuthFailure.custom(
           e.toString(),
@@ -93,7 +92,7 @@ class FirebaseAuthService extends AuthService {
         );
       }
     } catch (e, s) {
-      debugPrint('$e $s');
+      logger.error(e, s);
       return Left(
         AuthFailure.custom(
           e.toString(),
@@ -129,7 +128,7 @@ class FirebaseAuthService extends AuthService {
         AuthFailure.custom(e.message ?? e.code),
       );
     } catch (e, s) {
-      debugPrint('$e $s');
+      logger.error(e, s);
       return Left(
         AuthFailure.custom(
           e.toString(),

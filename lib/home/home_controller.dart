@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swipecards/flutter_swipecards.dart';
 import 'package:get/get.dart';
+import 'package:terndy_movies/domain/base_dependency_container.dart';
 import 'package:terndy_movies/home/domain/entity/movies_page_model.dart';
 import 'package:terndy_movies/home/trendy_movies_page.dart';
 import 'package:terndy_movies/movies/movies_service.dart';
 
-class HomeController extends GetxController with StateMixin<MoviesPageModel> {
+class HomeController extends GetxController
+    with StateMixin<MoviesPageModel>, BaseToolBox {
   HomeController({required this.homeRepository});
   final RxInt index = 0.obs;
   final IHomeRepository homeRepository;
@@ -78,8 +80,8 @@ class HomeController extends GetxController with StateMixin<MoviesPageModel> {
     try {
       return Get.find<MovieCardController>(
           tag: state!.results[index.value].id.toString());
-    } catch (e) {
-      debugPrint(e.toString());
+    } catch (e, s) {
+      logger.error(e, s);
       return null;
     }
   }

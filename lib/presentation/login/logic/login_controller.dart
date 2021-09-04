@@ -105,7 +105,8 @@ class LoginController extends GetxController with BaseToolBox {
     }, custom: (String x) {
       msgToShow = x;
     });
-    debugPrint('error $msgToShow');
+    logger.debug(msgToShow);
+
     Get.snackbar<void>('error', msgToShow);
   }
 }
