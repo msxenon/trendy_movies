@@ -1,7 +1,8 @@
 {
   "app": {
     "welcome_user_name": "Welcome {name}!",
-    "name": "Trendy Movies"
+    "name": "Trendy Movies",
+    "is_dark_theme": "is Dark theme?"
   },
   "actions": {
     "done": "Done",
@@ -28,5 +29,17 @@
     "display_name": "Display name",
     "email": "Email",
     "password": "Password"
+  },
+  "errors": {
+    "error": "Error",
+    "display_name_val": "Wrong display name pattern",
+    "all_fields_val": "All Fields are required!",
+    "password_empty": "Password should not be empty",
+    "email_val": "Wrong email pattern",
+    "unknown": "Unknown error",
+    "weak_password": "Weak password",
+    "email_already_in_use": "Email already in use"
+
   }
+
 }

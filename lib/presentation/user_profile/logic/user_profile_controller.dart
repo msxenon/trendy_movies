@@ -6,6 +6,13 @@ class UserProfileController extends GetxController with BaseToolBox {
   late final TextEditingController displayNameController =
       TextEditingController(text: _initialDisplayName);
   late final _initialDisplayName = authService.signedInUserModel.displayName;
+  late bool isDarkTheme;
+  @override
+  void onInit() {
+    isDarkTheme = Get.isDarkMode;
+    super.onInit();
+  }
+
   Future<void> saveChanges() async {
     if (validateDisplayName() != null) {
       update();
@@ -24,5 +31,12 @@ class UserProfileController extends GetxController with BaseToolBox {
       return 'Wrong display name pattern';
     }
     return null;
+  }
+
+  void toggleTheme(bool isDarkMode) {
+    Get.changeThemeMode(isDarkMode ? ThemeMode.dark : ThemeMode.light);
+    isDarkTheme = !isDarkTheme;
+    update();
+    Get.forceAppUpdate();
   }
 }

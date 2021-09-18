@@ -41,6 +41,9 @@ class MyApp extends StatelessWidget with BaseToolBox {
           GlobalWidgetsLocalizations.delegate,
           localizationDelegate
         ],
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        themeMode: Get.isDarkMode ? ThemeMode.dark : ThemeMode.light,
         supportedLocales: localizationDelegate.supportedLocales,
         locale: localizationDelegate.currentLocale,
         getPages: [

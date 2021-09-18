@@ -35,23 +35,34 @@ class UserProfileScreen extends GetWidget<UserProfileController> {
                     size: Get.width / 2,
                   ),
                 ),
-                TextField(
-                  enabled: false,
-                  controller: TextEditingController(text: 'e@e.com'),
-                  decoration: InputDecoration(
-                    hintText: Keys.User_Email.trans,
+                ListTile(
+                  title: TextField(
+                    enabled: false,
+                    controller: TextEditingController(text: 'e@e.com'),
+                    decoration: InputDecoration(
+                      hintText: Keys.User_Email.trans,
+                    ),
                   ),
                 ),
-                TextField(
-                  controller: controller.displayNameController,
-                  decoration: InputDecoration(
-                    hintText: Keys.User_Display_Name.trans,
-                    errorText: controller.validateDisplayName(),
+                ListTile(
+                  title: TextField(
+                    controller: controller.displayNameController,
+                    decoration: InputDecoration(
+                      hintText: Keys.User_Display_Name.trans,
+                      errorText: controller.validateDisplayName(),
+                    ),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: controller.authService.signOut,
-                  child: Text(Keys.User_Sign_Out.trans),
+                SwitchListTile.adaptive(
+                  value: controller.isDarkTheme,
+                  onChanged: controller.toggleTheme,
+                  title: Text(Keys.App_Is_Dark_Theme.trans),
+                ),
+                ListTile(
+                  title: ElevatedButton(
+                    onPressed: controller.authService.signOut,
+                    child: Text(Keys.User_Sign_Out.trans),
+                  ),
                 )
               ],
             ),

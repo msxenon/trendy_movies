@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:terndy_movies/application/localisation/keys.dart';
 import 'package:terndy_movies/domain/auth/auth_entity.dart';
 import 'package:terndy_movies/domain/auth/auth_result.dart';
 import 'package:terndy_movies/domain/base_dependency_container.dart';
@@ -23,7 +24,7 @@ class LoginController extends GetxController with BaseToolBox {
   Future<AuthSignInResult> _signIn() async {
     update();
     if (!_validateLogin()) {
-      return const AuthSignInResult.error('All Fields are required!');
+      return AuthSignInResult.error(Keys.Errors_All_Fields_Val.trans);
     }
     return authService.signInWithEmail(
       SignInEntity(
@@ -43,14 +44,14 @@ class LoginController extends GetxController with BaseToolBox {
 
   String? validatePassword() {
     if (passwordController.text.isEmpty) {
-      return 'Password should not be empty';
+      return Keys.Errors_Password_Empty.trans;
     }
     return null;
   }
 
   String? validateEmail() {
     if (!emailController.text.isEmail) {
-      return 'Wrong email pattern';
+      return Keys.Errors_Email_Val.trans;
     }
     return null;
   }
@@ -58,7 +59,7 @@ class LoginController extends GetxController with BaseToolBox {
   String? validateDisplayName() {
     if (displayNameController.text.isEmpty ||
         !displayNameController.text.isAlphabetOnly) {
-      return 'Wrong email pattern';
+      return Keys.Errors_Display_Name_Val.trans;
     }
     return null;
   }
@@ -81,17 +82,17 @@ class LoginController extends GetxController with BaseToolBox {
   }
 
   void _onError(AuthRegisterError l) {
-    var msgToShow = 'unknown error';
+    var msgToShow = Keys.Errors_Unknown.trans;
     l.when(weakPassword: () {
-      msgToShow = 'weakPassword';
+      msgToShow = Keys.Errors_Weak_Password.trans;
     }, emailAlreadyInUse: () {
-      msgToShow = 'emailAlreadyInUse';
+      msgToShow = Keys.Errors_Email_Already_In_Use.trans;
     }, custom: (String x) {
       msgToShow = x;
     });
     logger.debug(msgToShow);
 
-    Get.snackbar<void>('error', msgToShow);
+    Get.snackbar<void>(Keys.Errors_Error.trans, msgToShow);
   }
 
   Future<void> _onSignIn() async {
@@ -99,16 +100,16 @@ class LoginController extends GetxController with BaseToolBox {
     signInResult.when(
         success: (s) {},
         error: (e) {
-          Get.snackbar<void>('error', e);
+          Get.snackbar<void>(Keys.Errors_Error.trans, e);
         });
   }
 
   Future<AuthRegisterResult> _register() async {
     update();
     if (!_validateRegister()) {
-      return const AuthRegisterResult.error(
+      return AuthRegisterResult.error(
         AuthRegisterError.custom(
-          'All Fields are required!',
+          Keys.Errors_All_Fields_Val.trans,
         ),
       );
     }
@@ -130,7 +131,7 @@ class LoginController extends GetxController with BaseToolBox {
         signIn.when(
           success: (s) {},
           error: (e) {
-            Get.snackbar<void>('error', e);
+            Get.snackbar<void>(Keys.Errors_Error.trans, e);
           },
         );
       },
