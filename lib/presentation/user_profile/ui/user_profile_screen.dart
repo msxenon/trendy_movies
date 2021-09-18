@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:terndy_movies/application/localisation/keys.dart';
 import 'package:terndy_movies/presentation/user_profile/logic/user_profile_controller.dart';
 import 'package:terndy_movies/presentation/user_profile/ui/user_avatar.dart';
 
@@ -10,14 +11,14 @@ class UserProfileScreen extends GetWidget<UserProfileController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: Text(Keys.Route_Titles_Profile.trans),
         centerTitle: true,
         actions: [
           TextButton(
             onPressed: controller.saveChanges,
-            child: const Text(
-              'Done',
-              style: TextStyle(color: Colors.white),
+            child: Text(
+              Keys.Actions_Done.trans,
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ],
@@ -37,20 +38,20 @@ class UserProfileScreen extends GetWidget<UserProfileController> {
                 TextField(
                   enabled: false,
                   controller: TextEditingController(text: 'e@e.com'),
-                  decoration: const InputDecoration(
-                    hintText: 'Email',
+                  decoration: InputDecoration(
+                    hintText: Keys.User_Email.trans,
                   ),
                 ),
                 TextField(
                   controller: controller.displayNameController,
                   decoration: InputDecoration(
-                    hintText: 'Display name',
+                    hintText: Keys.User_Display_Name.trans,
                     errorText: controller.validateDisplayName(),
                   ),
                 ),
                 ElevatedButton(
                   onPressed: controller.authService.signOut,
-                  child: const Text('Sign out'),
+                  child: Text(Keys.User_Sign_Out.trans),
                 )
               ],
             ),

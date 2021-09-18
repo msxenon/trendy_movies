@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:terndy_movies/domain/base_dependency_container.dart';
 import 'package:terndy_movies/movies/movies_service.dart';
 import 'package:terndy_movies/presentation/home/domain/entity/movies_page_model.dart';
-import 'package:terndy_movies/presentation/home/trendy_movies_page.dart';
+import 'package:terndy_movies/presentation/home/logic/movie_card_controller.dart';
 
 class HomeController extends GetxController
     with StateMixin<MoviesPageModel>, BaseToolBox {

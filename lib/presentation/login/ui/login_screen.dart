@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:terndy_movies/application/localisation/keys.dart';
 import 'package:terndy_movies/presentation/login/logic/login_controller.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class LoginScreen extends StatelessWidget {
                       keyboardType: TextInputType.name,
                       controller: controller.displayNameController,
                       decoration: InputDecoration(
-                        hintText: 'TermsListBase().close'.tr,
+                        hintText: Keys.User_Display_Name.trans,
                         errorText: controller.validateDisplayName(),
                       ),
                     ),
@@ -30,7 +31,7 @@ class LoginScreen extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     controller: controller.emailController,
                     decoration: InputDecoration(
-                      hintText: 'Email',
+                      hintText: Keys.User_Email.trans,
                       errorText: controller.validateEmail(),
                     ),
                   ),
@@ -40,20 +41,20 @@ class LoginScreen extends StatelessWidget {
                     controller: controller.passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
-                      hintText: 'Password',
+                      hintText: Keys.User_Password.trans,
                       errorText: controller.validatePassword(),
                     ),
                   ),
                   ElevatedButton(
                       onPressed: controller.submit,
                       child: controller.viewState.value.isLogin
-                          ? const Text('Login')
-                          : const Text('Register')),
+                          ? Text(Keys.Actions_Sign_In.trans)
+                          : Text(Keys.Actions_Sign_Up.trans)),
                   ElevatedButton(
                       onPressed: controller.toggleLogin,
                       child: controller.viewState.value.isLogin
-                          ? const Text('is not registered?')
-                          : const Text('is already registered?'))
+                          ? Text(Keys.Actions_Q_Not_Registered_Yet.trans)
+                          : Text(Keys.Actions_Q_Already_Signed_Up.trans))
                 ],
               ),
             ),

@@ -1,0 +1,32 @@
+{
+  "app": {
+    "welcome_user_name": "Welcome {name}!",
+    "name": "Trendy Movies"
+  },
+  "actions": {
+    "done": "Done",
+    "sign_in": "Sign In",
+    "sign_up": "Sign Up",
+    "q_not_registered_yet": "Not registered yet?",
+    "q_already_signed_up": "Already have a login credentials?",
+    "movies": {
+      "seen": "Seen",
+      "never": "Never",
+      "add_wishlist": "Add to wishlist",
+      "maybe_later": "Maybe later"
+    }
+  },
+  "route_titles": {
+    "sign": "Sign in/up",
+    "home": "Home",
+    "main_route": "Loading",
+    "unknown": "Unknown",
+    "profile": "Profile"
+  },
+  "user": {
+    "sign_out": "Sign out",
+    "display_name": "Display name",
+    "email": "Email",
+    "password": "Password"
+  }
+}
