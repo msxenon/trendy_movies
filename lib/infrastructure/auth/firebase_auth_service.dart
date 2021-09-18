@@ -12,21 +12,31 @@ class FirebaseAuthService extends AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   void onInit() {
+    _auth.setPersistence(Persistence.LOCAL);
     _userStateListener();
     super.onInit();
   }
 
   void _userStateListener() {
-    _auth.userChanges().listen((User? user) {
-      if (user == null) {
-        authStateChanges(const AuthUserModel.unknown());
+    _auth.userChanges().listen(
+      (User? user) {
+        if (user == null) {
+          authStateChanges(const AuthUserModel.unknown());
+        } else {
+          final userAuthModel = AuthUserModel.signedIn(
+            id: user.uid,
+            displayName: _getDisplayNameFromUser(user) ?? 'Unknown',
+          );
+          authStateChanges(userAuthModel);
+        }
+      },
+    );
+
+    ever(authStateChanges, (callback) {
+      if (isLoggedIn) {
+        navigateOnSignedIn();
       } else {
-        final userAuthModel = AuthUserModel.signedIn(
-          id: user.uid,
-          displayName: _getDisplayNameFromUser(user) ?? 'Unknown',
-        );
-        database.saveUserAuth(userAuthModel);
-        authStateChanges(userAuthModel);
+        NavUtils.loadFromMainRoute();
       }
     });
   }
@@ -78,7 +88,7 @@ class FirebaseAuthService extends AuthService {
         id: user.user!.uid,
         displayName: _getDisplayNameFromCreds(user),
       );
-      authStateChanges(userModel);
+      // authStateChanges(userModel);
       return AuthSignInResult.success(
         userModel,
       );
@@ -103,7 +113,7 @@ class FirebaseAuthService extends AuthService {
         id: user.user!.uid,
         displayName: _getDisplayNameFromCreds(user),
       );
-      authStateChanges(userModel);
+      // authStateChanges(userModel);
       return AuthSignInResult.success(
         userModel,
       );
@@ -123,7 +133,7 @@ class FirebaseAuthService extends AuthService {
   Future<void> signOut() async {
     await _auth.signOut();
     await super.signOut();
-    NavUtils.loadFromMainRoute();
+    // NavUtils.loadFromMainRoute();
   }
 
   String _getDisplayNameFromCreds(UserCredential user) {
@@ -145,5 +155,10 @@ class FirebaseAuthService extends AuthService {
       Get.forceAppUpdate();
     }
     return;
+  }
+
+  @override
+  void navigateOnSignedIn() {
+    NavUtils.continueAsLoggedIn();
   }
 }

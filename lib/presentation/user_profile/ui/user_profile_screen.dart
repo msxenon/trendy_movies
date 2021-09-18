@@ -48,6 +48,10 @@ class UserProfileScreen extends GetWidget<UserProfileController> {
                     errorText: controller.validateDisplayName(),
                   ),
                 ),
+                ElevatedButton(
+                  onPressed: controller.authService.signOut,
+                  child: const Text('Sign out'),
+                )
               ],
             ),
           );

@@ -11,12 +11,10 @@ class DatabaseServiceImpl extends DatabaseService {
   }
 
   void _registerAdapters() {
-    registerAuthAdapter();
     return;
   }
 
   Future<void> _openAdapters() async {
-    await openAuthAdapter();
     return;
   }
 }

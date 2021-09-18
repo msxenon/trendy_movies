@@ -20,16 +20,7 @@ abstract class AuthService extends BaseService {
     authStateChanges(_notLoggedIn);
   }
 
-  @override
-  void onInit() {
-    onLaunch();
-    super.onInit();
-  }
-
-  @mustCallSuper
-  Future<void> onLaunch() async {
-    authStateChanges(database.restoreUserAuth());
-  }
+  void navigateOnSignedIn();
 
   Future<AuthRegisterResult> registerWithEmail(
     RegisterEntity registerEntity,
