@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 import 'package:terndy_movies/application/utils/nav_utils.dart';
 import 'package:terndy_movies/domain/auth/auth_entity.dart';
 import 'package:terndy_movies/domain/auth/auth_result.dart';
@@ -18,9 +19,9 @@ class FirebaseAuthService extends AuthService {
   void _userStateListener() {
     _auth.userChanges().listen((User? user) {
       if (user == null) {
-        authStateChanges(const AuthUserModel.notLoggedIn());
+        authStateChanges(const AuthUserModel.unknown());
       } else {
-        final userAuthModel = AuthUserModel.loggedIn(
+        final userAuthModel = AuthUserModel.signedIn(
           id: user.uid,
           displayName: _getDisplayNameFromUser(user) ?? 'Unknown',
         );
@@ -37,7 +38,7 @@ class FirebaseAuthService extends AuthService {
     try {
       final user = await _auth.createUserWithEmailAndPassword(
           email: registerEntity.email, password: registerEntity.password);
-      await _auth.currentUser?.updateDisplayName(registerEntity.displayName);
+      await updateDisplayName(registerEntity.displayName);
       final token = user.user!.refreshToken!;
       return AuthRegisterResult.success(
         token,
@@ -73,7 +74,7 @@ class FirebaseAuthService extends AuthService {
     try {
       final user = await _auth.signInWithEmailAndPassword(
           email: emailSignInEntity.email, password: emailSignInEntity.password);
-      final userModel = AuthUserModel.loggedIn(
+      final userModel = AuthUserModel.signedIn(
         id: user.user!.uid,
         displayName: _getDisplayNameFromCreds(user),
       );
@@ -98,7 +99,7 @@ class FirebaseAuthService extends AuthService {
     try {
       final user = await _auth.signInWithCustomToken(token);
 
-      final userModel = AuthUserModel.loggedIn(
+      final userModel = AuthUserModel.signedIn(
         id: user.user!.uid,
         displayName: _getDisplayNameFromCreds(user),
       );
@@ -134,5 +135,15 @@ class FirebaseAuthService extends AuthService {
 
   String? _getDisplayNameFromUser(User? user) {
     return user?.displayName;
+  }
+
+  @override
+  Future<void> updateDisplayName(String displayName,
+      {bool refreshUI = false}) async {
+    await _auth.currentUser?.updateDisplayName(displayName);
+    if (refreshUI) {
+      Get.forceAppUpdate();
+    }
+    return;
   }
 }

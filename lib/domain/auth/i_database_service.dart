@@ -10,7 +10,7 @@ mixin AuthDataBaseMix {
 
   @mustCallSuper
   AuthUserModel restoreUserAuth() {
-    return _authBox.get(0, defaultValue: const AuthUserModel.notLoggedIn())!;
+    return _authBox.get(0, defaultValue: const AuthUserModel.unknown())!;
   }
 
   void registerAuthAdapter() {

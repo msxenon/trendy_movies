@@ -9,9 +9,11 @@ import 'package:terndy_movies/domain/base_service.dart';
 
 abstract class AuthService extends BaseService {
   //Notifies when the authentication status changes.
-  Rx<AuthUserModel> authStateChanges = _notLoggedIn.obs;
+  final Rx<AuthUserModel> authStateChanges = _notLoggedIn.obs;
+  SignedInUserModel get signedInUserModel =>
+      authStateChanges.value.mapOrNull(signedIn: (s) => s)!;
   bool get isLoggedIn => authStateChanges.value != _notLoggedIn;
-  static const _notLoggedIn = AuthUserModel.notLoggedIn();
+  static const _notLoggedIn = AuthUserModel.unknown();
   //Logs out from the service.
   @mustCallSuper
   Future<void> signOut() async {
@@ -41,5 +43,5 @@ abstract class AuthService extends BaseService {
     SignInEntity emailSignInEntity,
   );
 
-  // Future<void> registerWithAutoSignIn(RegisterEntity registerEntity);
+  Future<void> updateDisplayName(String displayName, {bool refreshUI = false});
 }

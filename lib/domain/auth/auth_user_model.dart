@@ -10,11 +10,11 @@ class AuthUserModel with _$AuthUserModel {
   @HiveType(
       typeId: HiveAdaptersData.authUserModelTid,
       adapterName: HiveAdaptersData.authUserModelName)
-  const factory AuthUserModel.loggedIn({
+  const factory AuthUserModel.signedIn({
     @HiveField(0) required String id,
     @HiveField(1) required String displayName,
-  }) = _AuthUserModel;
-  const factory AuthUserModel.notLoggedIn() = _noLoggedIn;
+  }) = SignedInUserModel;
+  const factory AuthUserModel.unknown() = _unknown;
   factory AuthUserModel.fromJson(Map<String, dynamic> json) =>
       _$AuthUserModelFromJson(json);
 }
