@@ -1,8 +1,7 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/application/utils/nav_utils.dart';
-import 'package:terndy_movies/domain/auth/auth_failure.dart';
+import 'package:terndy_movies/domain/auth/auth_entity.dart';
+import 'package:terndy_movies/domain/auth/auth_result.dart';
 import 'package:terndy_movies/domain/base_dependency_container.dart';
 
 enum LoginViewState { login, register, reset }
@@ -20,25 +19,16 @@ class LoginController extends GetxController with BaseToolBox {
   final TextEditingController displayNameController = TextEditingController();
   final TextEditingController passwordController =
       TextEditingController(text: '12345678');
-  Future<Either<AuthFailure, void>> register() {
-    update();
-    if (!_validateRegister()) {
-      return Future.value();
-    }
-    return authService.registerWithEmail(
-      email: emailController.text,
-      password: passwordController.text,
-      displayName: displayNameController.text,
-    );
-  }
 
-  Future<Either<AuthFailure, void>> login() {
+  Future<AuthSignInResult> _signIn() async {
     update();
     if (!_validateLogin()) {
-      return Future.value();
+      return const AuthSignInResult.error('All Fields are required!');
     }
     return authService.signInWithEmail(
-        email: emailController.text, password: passwordController.text);
+      SignInEntity(
+          email: emailController.text, password: passwordController.text),
+    );
   }
 
   bool _validateLogin() {
@@ -82,21 +72,15 @@ class LoginController extends GetxController with BaseToolBox {
     update();
   }
 
-  Future<void> submit() async {
-    Either<AuthFailure, void> result;
+  void submit() {
     if (viewState.value.isLogin) {
-      result = await login();
+      _onSignIn();
     } else {
-      result = await register();
+      _onRegisterWithAutoSignIn();
     }
-
-    result.fold(_onError, (r) {
-      NavUtils.loadFromMainRoute();
-      return;
-    });
   }
 
-  void _onError(AuthFailure l) {
+  void _onError(AuthRegisterError l) {
     var msgToShow = 'unknown error';
     l.when(weakPassword: () {
       msgToShow = 'weakPassword';
@@ -108,5 +92,49 @@ class LoginController extends GetxController with BaseToolBox {
     logger.debug(msgToShow);
 
     Get.snackbar<void>('error', msgToShow);
+  }
+
+  Future<void> _onSignIn() async {
+    final signInResult = await _signIn();
+    signInResult.when(
+        success: (s) {},
+        error: (e) {
+          Get.snackbar<void>('error', e);
+        });
+  }
+
+  Future<AuthRegisterResult> _register() async {
+    update();
+    if (!_validateRegister()) {
+      return const AuthRegisterResult.error(
+        AuthRegisterError.custom(
+          'All Fields are required!',
+        ),
+      );
+    }
+    return authService.registerWithEmail(
+      RegisterEntity(
+        email: emailController.text,
+        password: passwordController.text,
+        displayName: displayNameController.text,
+      ),
+    );
+  }
+
+  Future<void> _onRegisterWithAutoSignIn() async {
+    final register = await _register();
+
+    register.when(
+      success: (token) async {
+        final signIn = await authService.signInWithToken(token);
+        signIn.when(
+          success: (s) {},
+          error: (e) {
+            Get.snackbar<void>('error', e);
+          },
+        );
+      },
+      error: (e) => _onError,
+    );
   }
 }

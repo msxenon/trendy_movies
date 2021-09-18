@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:terndy_movies/home/domain/entity/movies_page_model.dart';
+import 'package:terndy_movies/presentation/home/domain/entity/movies_page_model.dart';
 
 // ignore: one_member_abstracts
 abstract class IHomeRepository {

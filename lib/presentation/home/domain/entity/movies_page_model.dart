@@ -1,5 +1,7 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:terndy_movies/home/domain/entity/movie_model.dart';
+import 'package:terndy_movies/presentation/home/domain/entity/movie_model.dart';
 
 part 'movies_page_model.freezed.dart';
 part 'movies_page_model.g.dart';

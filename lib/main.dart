@@ -4,7 +4,7 @@ import 'package:terndy_movies/application/utils/app_routes.dart';
 import 'package:terndy_movies/application/utils/middlewares/splash_middleware.dart';
 import 'package:terndy_movies/dependencies_container.dart';
 import 'package:terndy_movies/domain/base_dependency_container.dart';
-import 'package:terndy_movies/home/home_screen.dart';
+ import 'package:terndy_movies/presentation/home/home_screen.dart';
 import 'package:terndy_movies/presentation/login/logic/login_screen_bindings.dart';
 import 'package:terndy_movies/presentation/login/ui/login_screen.dart';
 import 'package:terndy_movies/presentation/splash/splash_screen.dart';

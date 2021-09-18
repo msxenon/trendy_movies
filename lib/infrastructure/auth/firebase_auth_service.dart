@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:terndy_movies/application/utils/nav_utils.dart';
-import 'package:terndy_movies/domain/auth/auth_failure.dart';
+import 'package:terndy_movies/domain/auth/auth_entity.dart';
+import 'package:terndy_movies/domain/auth/auth_result.dart';
 import 'package:terndy_movies/domain/auth/auth_user_model.dart';
 import 'package:terndy_movies/domain/auth/i_auth_service.dart';
 
@@ -31,27 +31,89 @@ class FirebaseAuthService extends AuthService {
   }
 
   @override
-  Future<Either<AuthFailure, AuthUserModel>> signInWithEmailExc(
-      {required String email, required String password}) async {
+  Future<AuthRegisterResult> registerWithEmail(
+    RegisterEntity registerEntity,
+  ) async {
     try {
-      final user = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      return Right(
-        AuthUserModel.loggedIn(
-          id: user.user!.uid,
-          displayName: _getDisplayNameFromCreds(user),
-        ),
+      final user = await _auth.createUserWithEmailAndPassword(
+          email: registerEntity.email, password: registerEntity.password);
+      await _auth.currentUser?.updateDisplayName(registerEntity.displayName);
+      final token = user.user!.refreshToken!;
+      return AuthRegisterResult.success(
+        token,
       );
     } on FirebaseAuthException catch (e) {
-      return Left(
-        AuthFailure.custom(e.message ?? e.code),
+      if (e.code == 'weak-password') {
+        return const AuthRegisterResult.error(
+          AuthRegisterError.weakPassword(),
+        );
+      } else if (e.code == 'email-already-in-use') {
+        return const AuthRegisterResult.error(
+          AuthRegisterError.emailAlreadyInUse(),
+        );
+      } else {
+        return AuthRegisterResult.error(
+          AuthRegisterError.custom(e.message ?? e.code),
+        );
+      }
+    } catch (e, s) {
+      logger.error(e, s);
+      return AuthRegisterResult.error(
+        AuthRegisterError.custom(
+          e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<AuthSignInResult> signInWithEmail(
+    SignInEntity emailSignInEntity,
+  ) async {
+    try {
+      final user = await _auth.signInWithEmailAndPassword(
+          email: emailSignInEntity.email, password: emailSignInEntity.password);
+      final userModel = AuthUserModel.loggedIn(
+        id: user.user!.uid,
+        displayName: _getDisplayNameFromCreds(user),
+      );
+      authStateChanges(userModel);
+      return AuthSignInResult.success(
+        userModel,
+      );
+    } on FirebaseAuthException catch (e) {
+      return AuthSignInResult.error(
+        e.message ?? e.code,
       );
     } catch (e, s) {
       logger.error(e, s);
-      return Left(
-        AuthFailure.custom(
-          e.toString(),
-        ),
+      return AuthSignInResult.error(
+        e.toString(),
+      );
+    }
+  }
+
+  @override
+  Future<AuthSignInResult> signInWithToken(String token) async {
+    try {
+      final user = await _auth.signInWithCustomToken(token);
+
+      final userModel = AuthUserModel.loggedIn(
+        id: user.user!.uid,
+        displayName: _getDisplayNameFromCreds(user),
+      );
+      authStateChanges(userModel);
+      return AuthSignInResult.success(
+        userModel,
+      );
+    } on FirebaseAuthException catch (e) {
+      return AuthSignInResult.error(
+        e.message ?? e.code,
+      );
+    } catch (e, s) {
+      logger.error(e, s);
+      return AuthSignInResult.error(
+        e.toString(),
       );
     }
   }
@@ -63,44 +125,6 @@ class FirebaseAuthService extends AuthService {
     NavUtils.loadFromMainRoute();
   }
 
-  @override
-  Future<Either<AuthFailure, AuthUserModel>> registerWithEmailExc({
-    required String email,
-    required String password,
-    required String displayName,
-  }) async {
-    try {
-      final user = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      await _auth.currentUser?.updateDisplayName(displayName);
-      await signInWithToken(token: user.user!.refreshToken!);
-      return Right(
-        AuthUserModel.loggedIn(id: user.user!.uid, displayName: displayName),
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        return const Left(
-          AuthFailure.weakPassword(),
-        );
-      } else if (e.code == 'email-already-in-use') {
-        return const Left(
-          AuthFailure.emailAlreadyInUse(),
-        );
-      } else {
-        return Left(
-          AuthFailure.custom(e.message ?? e.code),
-        );
-      }
-    } catch (e, s) {
-      logger.error(e, s);
-      return Left(
-        AuthFailure.custom(
-          e.toString(),
-        ),
-      );
-    }
-  }
-
   String _getDisplayNameFromCreds(UserCredential user) {
     return _getDisplayNameFromUser(user.user) ??
         user.additionalUserInfo?.username ??
@@ -110,30 +134,5 @@ class FirebaseAuthService extends AuthService {
 
   String? _getDisplayNameFromUser(User? user) {
     return user?.displayName;
-  }
-
-  @override
-  Future<Either<AuthFailure, AuthUserModel>> signInWithTokenExc(
-      {required String token}) async {
-    try {
-      final user = await _auth.signInWithCustomToken(token);
-      return Right(
-        AuthUserModel.loggedIn(
-          id: user.user!.uid,
-          displayName: _getDisplayNameFromCreds(user),
-        ),
-      );
-    } on FirebaseAuthException catch (e) {
-      return Left(
-        AuthFailure.custom(e.message ?? e.code),
-      );
-    } catch (e, s) {
-      logger.error(e, s);
-      return Left(
-        AuthFailure.custom(
-          e.toString(),
-        ),
-      );
-    }
   }
 }

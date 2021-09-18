@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:terndy_movies/domain/base_dependency_container.dart';
-import 'package:terndy_movies/home/trendy_movies_page.dart';
+ import 'package:terndy_movies/presentation/home/trendy_movies_page.dart';
 
 class HomeScreen extends StatelessWidget with BaseToolBox {
   const HomeScreen({Key? key}) : super(key: key);

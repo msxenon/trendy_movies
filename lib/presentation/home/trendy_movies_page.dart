@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swipecards/flutter_swipecards.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/home/domain/entity/movie_model.dart';
-import 'package:terndy_movies/home/home_controller.dart';
+import 'package:terndy_movies/presentation/home/domain/entity/movie_model.dart';
+import 'package:terndy_movies/presentation/home/home_controller.dart';
 
 class TrendyMoviesPage extends GetView<HomeController> {
   const TrendyMoviesPage({Key? key}) : super(key: key);
