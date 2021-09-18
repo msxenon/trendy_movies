@@ -5,7 +5,8 @@ import 'package:terndy_movies/domain/base_dependency_container.dart';
 class UserProfileController extends GetxController with BaseToolBox {
   late final TextEditingController displayNameController =
       TextEditingController(text: _initialDisplayName);
-  late final _initialDisplayName = authService.signedInUserModel.displayName;
+  late final _initialDisplayName =
+      authService.signedInUserModel.value.displayName;
   late bool isDarkTheme;
   @override
   void onInit() {

@@ -10,8 +10,10 @@ import 'package:terndy_movies/domain/base_service.dart';
 abstract class AuthService extends BaseService {
   //Notifies when the authentication status changes.
   final Rx<AuthUserModel> authStateChanges = _notLoggedIn.obs;
-  SignedInUserModel get signedInUserModel =>
-      authStateChanges.value.mapOrNull(signedIn: (s) => s)!;
+  Rx<SignedInUserModel> get signedInUserModel =>
+      (authStateChanges.value.mapOrNull(signedIn: (s) => s) ??
+              const SignedInUserModel(displayName: 'unknown', id: '00000'))
+          .obs;
   bool get isLoggedIn => authStateChanges.value != _notLoggedIn;
   static const _notLoggedIn = AuthUserModel.unknown();
   //Logs out from the service.

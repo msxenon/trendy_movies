@@ -13,11 +13,13 @@ class HomeScreen extends StatelessWidget with BaseToolBox {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          Keys.App_Welcome_User_Name.transArgs(
-            {
-              'name': authService.signedInUserModel.displayName,
-            },
+        title: Obx(
+          () => Text(
+            Keys.App_Welcome_User_Name.transArgs(
+              {
+                'name': authService.signedInUserModel.value.displayName,
+              },
+            ),
           ),
         ),
         actions: [

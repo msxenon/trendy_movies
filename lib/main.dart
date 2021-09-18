@@ -56,6 +56,7 @@ class MyApp extends StatelessWidget with BaseToolBox {
                     .copyWith(systemNavigationBarColor: Colors.white),
           );
         },
+        initialRoute: AppRoutes.mainRoute,
         getPages: [
           GetPage<void>(
             name: AppRoutes.mainRoute,
@@ -74,6 +75,7 @@ class MyApp extends StatelessWidget with BaseToolBox {
           GetPage<void>(
             name: AppRoutes.home,
             page: () => const HomeScreen(),
+            transition: Transition.noTransition,
             bindings: [
               HomeScreenBindings(),
             ],

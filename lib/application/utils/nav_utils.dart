@@ -4,7 +4,9 @@ import 'package:terndy_movies/application/utils/app_routes.dart';
 class NavUtils {
   static void loadFromMainRoute() {
     if (Get.context != null) {
-      Get.offAllNamed<void>(AppRoutes.mainRoute);
+      Get.offAndToNamed(
+        AppRoutes.mainRoute,
+      );
     }
   }
 

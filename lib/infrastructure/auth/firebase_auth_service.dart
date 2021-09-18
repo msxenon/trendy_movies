@@ -10,6 +10,7 @@ import 'package:terndy_movies/domain/auth/i_auth_service.dart';
 
 class FirebaseAuthService extends AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  bool _isLoggedIn = false;
   @override
   void onInit() {
     _userStateListener();
@@ -32,10 +33,14 @@ class FirebaseAuthService extends AuthService {
     );
 
     ever(authStateChanges, (callback) {
+      if (_isLoggedIn == isLoggedIn) {
+        return;
+      }
+      _isLoggedIn = isLoggedIn;
       if (isLoggedIn) {
         navigateOnSignedIn();
       } else {
-        NavUtils.loadFromMainRoute();
+        signOut();
       }
     });
   }
@@ -130,9 +135,11 @@ class FirebaseAuthService extends AuthService {
 
   @override
   Future<void> signOut() async {
+    NavUtils.loadFromMainRoute();
+    await 50.milliseconds.delay();
+
     await _auth.signOut();
     await super.signOut();
-    // NavUtils.loadFromMainRoute();
   }
 
   String _getDisplayNameFromCreds(UserCredential user) {
@@ -150,9 +157,9 @@ class FirebaseAuthService extends AuthService {
   Future<void> updateDisplayName(String displayName,
       {bool refreshUI = false}) async {
     await _auth.currentUser?.updateDisplayName(displayName);
-    if (refreshUI) {
-      Get.forceAppUpdate();
-    }
+    // if (refreshUI) {
+    //   Get.forceAppUpdate();
+    // }
     return;
   }
 
