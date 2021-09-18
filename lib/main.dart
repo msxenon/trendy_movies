@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:terndy_movies/application/utils/app_routes.dart';
 import 'package:terndy_movies/application/utils/middlewares/splash_middleware.dart';
@@ -27,6 +28,13 @@ class MyApp extends StatelessWidget with BaseToolBox {
     return GetMaterialApp(
       onGenerateTitle: (_) => _generateTitle(),
       logWriterCallback: logger.logWriter,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: const [
+        Locale('en', 'US'),
+      ],
       getPages: [
         GetPage<void>(
           name: AppRoutes.mainRoute,

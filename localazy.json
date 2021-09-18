@@ -1,0 +1,16 @@
+{
+
+  "writeKey": "a8496581377690388987-2d42469dcdeff2315079ea067e4389b44d03663b59e61044e04411a84e7ca2ef",
+  "readKey": "a8496581377690388987-aef48dd549b6a77837da34eae0c1f102ba06a50eb3593b84d0b7088af21f2dc7",
+
+  "upload": {
+    "type": "arb",
+    "files": "lib/l10n/intl_messages.arb"
+  },
+
+  "download": {
+    "includeSourceLang": true,
+    "files": "assets/translations/${lang}.json"
+  }
+
+}

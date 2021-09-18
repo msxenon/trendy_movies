@@ -19,6 +19,8 @@ dependencies:
   flutter_dotenv: ^5.0.2
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   freezed_annotation: ^0.14.3
 
   get: ^4.3.8
