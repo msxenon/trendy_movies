@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:get/get.dart';
@@ -46,6 +47,15 @@ class MyApp extends StatelessWidget with BaseToolBox {
         themeMode: Get.isDarkMode ? ThemeMode.dark : ThemeMode.light,
         supportedLocales: localizationDelegate.supportedLocales,
         locale: localizationDelegate.currentLocale,
+        builder: (context, child) {
+          return AnnotatedRegion<SystemUiOverlayStyle>(
+            child: child ?? const SizedBox.shrink(),
+            value: !Get.isDarkMode
+                ? SystemUiOverlayStyle.dark
+                : SystemUiOverlayStyle.light
+                    .copyWith(systemNavigationBarColor: Colors.white),
+          );
+        },
         getPages: [
           GetPage<void>(
             name: AppRoutes.mainRoute,

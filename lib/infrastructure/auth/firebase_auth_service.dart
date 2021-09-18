@@ -12,7 +12,6 @@ class FirebaseAuthService extends AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   void onInit() {
-    _auth.setPersistence(Persistence.LOCAL);
     _userStateListener();
     super.onInit();
   }
