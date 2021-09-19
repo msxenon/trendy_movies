@@ -22,6 +22,8 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - uses: actions/checkout@v2
+        # Setup the flutter environment.
       - name: Create .Env
       - run: |
             cd ../../assets/ &&
@@ -35,8 +37,7 @@ jobs:
             echo "THE_MOVIEDB_API_KEY={{$THE_MOVIEDB_API_KEY}}" >> .env
 
     #      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-#      - uses: actions/checkout@v2
-#          # Setup the flutter environment.
+
 #      - uses: subosito/flutter-action@v1
 #        with:
 #         channel: 'stable' # 'dev', 'alpha', default to: 'stable'
