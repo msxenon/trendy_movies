@@ -1,4 +1,4 @@
-import 'package:terndy_movies/domain/logger.dart';
+import 'package:trendy_movies/domain/logger.dart';
 
 class LoggerProdImpl extends Logger {
   ///here you can use sentry , crashlytics ... etc

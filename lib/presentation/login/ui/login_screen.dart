@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/application/localisation/keys.dart';
-import 'package:terndy_movies/presentation/login/logic/login_controller.dart';
-import 'package:terndy_movies/presentation/login/ui/submit_button.dart';
-import 'package:terndy_movies/presentation/login/ui/toggle_button.dart';
+import 'package:trendy_movies/application/localisation/keys.dart';
+import 'package:trendy_movies/presentation/login/logic/login_controller.dart';
+import 'package:trendy_movies/presentation/login/ui/submit_button.dart';
+import 'package:trendy_movies/presentation/login/ui/toggle_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);

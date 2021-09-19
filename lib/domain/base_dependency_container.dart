@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/domain/auth/i_auth_service.dart';
-import 'package:terndy_movies/domain/database.dart';
-import 'package:terndy_movies/domain/logger.dart';
+import 'package:trendy_movies/domain/auth/i_auth_service.dart';
+import 'package:trendy_movies/domain/database.dart';
+import 'package:trendy_movies/domain/logger.dart';
 
 abstract class BaseDependencyInjector {
   InstanceBuilderCallback<DatabaseService> get databaseService;

@@ -1,5 +1,5 @@
 import 'package:loggy/loggy.dart';
-import 'package:terndy_movies/domain/logger.dart';
+import 'package:trendy_movies/domain/logger.dart';
 
 class LoggerDevImpl extends Logger {
   late final _logger = Loggy<GlobalLoggy>('Dev');
@@ -7,7 +7,9 @@ class LoggerDevImpl extends Logger {
   void onInit() {
     Loggy.initLoggy(
       hierarchicalLogging: true,
-      logPrinter: const PrettyPrinter(showColors: true,),
+      logPrinter: const PrettyPrinter(
+        showColors: true,
+      ),
     );
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/domain/base_dependency_container.dart';
+import 'package:trendy_movies/application/localisation/keys.dart';
+import 'package:trendy_movies/domain/base_dependency_container.dart';
 
 class UserProfileController extends GetxController with BaseToolBox {
   late final TextEditingController displayNameController =
@@ -21,8 +22,10 @@ class UserProfileController extends GetxController with BaseToolBox {
       return;
     }
     if (_initialDisplayName != displayNameController.text) {
-      authService.updateDisplayName(displayNameController.text,
-          refreshUI: true,);
+      authService.updateDisplayName(
+        displayNameController.text,
+        refreshUI: true,
+      );
     }
     Get.back<void>();
   }
@@ -30,7 +33,7 @@ class UserProfileController extends GetxController with BaseToolBox {
   String? validateDisplayName() {
     if (displayNameController.text.isEmpty ||
         displayNameController.text.isNumericOnly) {
-      return 'Wrong display name pattern';
+      return Keys.Errors_Display_Name_Val.trans;
     }
 
     return null;

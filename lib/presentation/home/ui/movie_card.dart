@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/presentation/home/domain/entity/movie_model.dart';
-import 'package:terndy_movies/presentation/home/logic/movie_card_controller.dart';
-import 'package:terndy_movies/presentation/home/ui/movie_card_state_widget.dart';
+import 'package:trendy_movies/presentation/home/domain/entity/movie_model.dart';
+import 'package:trendy_movies/presentation/home/logic/movie_card_controller.dart';
+import 'package:trendy_movies/presentation/home/ui/movie_card_state_widget.dart';
 
 class MovieCard extends StatelessWidget {
   MovieCard({

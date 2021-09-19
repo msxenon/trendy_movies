@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/application/utils/app_routes.dart';
-import 'package:terndy_movies/domain/base_dependency_container.dart';
+import 'package:trendy_movies/application/utils/app_routes.dart';
+import 'package:trendy_movies/domain/base_dependency_container.dart';
 
 class SplashMiddleware extends GetMiddleware with BaseToolBox {
   @override

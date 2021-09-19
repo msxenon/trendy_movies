@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:terndy_movies/dependencies_container.dart';
-import 'package:terndy_movies/presentation/main_app/trendy_app.dart';
+import 'package:trendy_movies/dependencies_container.dart';
+import 'package:trendy_movies/presentation/main_app/trendy_app.dart';
 
 void main() {
   _startUp();

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/application/localisation/keys.dart';
-import 'package:terndy_movies/domain/auth/auth_entity.dart';
-import 'package:terndy_movies/domain/auth/auth_result.dart';
-import 'package:terndy_movies/domain/base_dependency_container.dart';
+import 'package:trendy_movies/application/localisation/keys.dart';
+import 'package:trendy_movies/domain/auth/auth_entity.dart';
+import 'package:trendy_movies/domain/auth/auth_result.dart';
+import 'package:trendy_movies/domain/base_dependency_container.dart';
 
 enum LoginViewState { login, register, reset }
 

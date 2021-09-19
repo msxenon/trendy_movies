@@ -1,5 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:terndy_movies/domain/database.dart';
+import 'package:trendy_movies/domain/database.dart';
 
 class DatabaseServiceImpl extends DatabaseService {
   @override

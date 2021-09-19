@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:terndy_movies/domain/base_dependency_container.dart';
+import 'package:trendy_movies/domain/base_dependency_container.dart';
 
 class SplashScreen extends StatelessWidget with BaseToolBox {
   const SplashScreen({Key? key, this.showLoading = false, this.textToDisplay})

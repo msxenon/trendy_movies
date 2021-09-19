@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:terndy_movies/application/utils/app_routes.dart';
+import 'package:trendy_movies/application/utils/app_routes.dart';
 
 void loadFromMainRoute() {
   if (Get.context != null) {

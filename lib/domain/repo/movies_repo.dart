@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:terndy_movies/domain/base_service.dart';
-import 'package:terndy_movies/domain/network/custom_http_client.dart';
-import 'package:terndy_movies/domain/network/movies_api.dart';
-import 'package:terndy_movies/presentation/home/domain/entity/movie_model.dart';
+import 'package:trendy_movies/domain/base_service.dart';
+import 'package:trendy_movies/domain/network/custom_http_client.dart';
+import 'package:trendy_movies/domain/network/movies_api.dart';
+import 'package:trendy_movies/presentation/home/domain/entity/movie_model.dart';
 
 abstract class MoviesRepo extends BaseService {
   MoviesRepo(this.client);

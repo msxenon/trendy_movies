@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:terndy_movies/application/localisation/keys.dart';
-import 'package:terndy_movies/presentation/home/logic/movie_card_controller.dart';
-import 'package:terndy_movies/presentation/home/ui/state_widget.dart';
+import 'package:trendy_movies/application/localisation/keys.dart';
+import 'package:trendy_movies/presentation/home/logic/movie_card_controller.dart';
+import 'package:trendy_movies/presentation/home/ui/state_widget.dart';
 
 class MovieCardStateWidget extends StatelessWidget {
   const MovieCardStateWidget({required this.state, Key? key}) : super(key: key);

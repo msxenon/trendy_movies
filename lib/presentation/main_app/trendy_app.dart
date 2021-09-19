@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/application/utils/app_routes.dart';
-import 'package:terndy_movies/application/utils/middlewares/splash_middleware.dart';
-import 'package:terndy_movies/domain/base_dependency_container.dart';
-import 'package:terndy_movies/presentation/home/ui/home_screen.dart';
-import 'package:terndy_movies/presentation/login/logic/login_screen_bindings.dart';
-import 'package:terndy_movies/presentation/login/ui/login_screen.dart';
-import 'package:terndy_movies/presentation/main_app/utils/app_annotated_region.dart';
-import 'package:terndy_movies/presentation/main_app/utils/title_gen.dart';
-import 'package:terndy_movies/presentation/splash/splash_screen.dart';
-import 'package:terndy_movies/presentation/user_profile/logic/user_profile_bindings.dart';
-import 'package:terndy_movies/presentation/user_profile/ui/user_profile_screen.dart';
+import 'package:trendy_movies/application/utils/app_routes.dart';
+import 'package:trendy_movies/application/utils/middlewares/splash_middleware.dart';
+import 'package:trendy_movies/domain/base_dependency_container.dart';
+import 'package:trendy_movies/presentation/home/ui/home_screen.dart';
+import 'package:trendy_movies/presentation/login/logic/login_screen_bindings.dart';
+import 'package:trendy_movies/presentation/login/ui/login_screen.dart';
+import 'package:trendy_movies/presentation/main_app/utils/app_annotated_region.dart';
+import 'package:trendy_movies/presentation/main_app/utils/title_gen.dart';
+import 'package:trendy_movies/presentation/splash/splash_screen.dart';
+import 'package:trendy_movies/presentation/user_profile/logic/user_profile_bindings.dart';
+import 'package:trendy_movies/presentation/user_profile/ui/user_profile_screen.dart';
 
 class TrendyApp extends StatelessWidget with BaseToolBox {
   TrendyApp({Key? key}) : super(key: key);

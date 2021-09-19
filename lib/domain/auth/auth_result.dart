@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:terndy_movies/domain/auth/auth_user_model.dart';
+import 'package:trendy_movies/domain/auth/auth_user_model.dart';
 
 part 'auth_result.freezed.dart';
 

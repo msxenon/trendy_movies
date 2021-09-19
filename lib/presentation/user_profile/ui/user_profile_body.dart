@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/application/localisation/keys.dart';
-import 'package:terndy_movies/presentation/user_profile/logic/user_profile_controller.dart';
-import 'package:terndy_movies/presentation/user_profile/ui/user_avatar.dart';
+import 'package:trendy_movies/application/localisation/keys.dart';
+import 'package:trendy_movies/presentation/user_profile/logic/user_profile_controller.dart';
+import 'package:trendy_movies/presentation/user_profile/ui/user_avatar.dart';
 
 class UserProfileBody extends GetView<UserProfileController> {
   const UserProfileBody({

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/presentation/login/logic/login_controller.dart';
+import 'package:trendy_movies/presentation/login/logic/login_controller.dart';
 
 class ToggleButton extends GetView<LoginController> {
   const ToggleButton({Key? key}) : super(key: key);

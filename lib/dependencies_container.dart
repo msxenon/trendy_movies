@@ -3,16 +3,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/application/logger_dev_impl.dart';
-import 'package:terndy_movies/application/logger_prod_impl.dart';
-import 'package:terndy_movies/application/utils/platform_custom_injector/custom_injector_io.dart'
-    if (dart.library.html) 'package:terndy_movies/application/utils/platform_custom_injector/custom_injector_js.dart';
-import 'package:terndy_movies/database/database_service_impl.dart';
-import 'package:terndy_movies/domain/auth/i_auth_service.dart';
-import 'package:terndy_movies/domain/base_dependency_container.dart';
-import 'package:terndy_movies/domain/database.dart';
-import 'package:terndy_movies/domain/logger.dart';
-import 'package:terndy_movies/infrastructure/auth/firebase_auth_service.dart';
+import 'package:trendy_movies/application/logger_dev_impl.dart';
+import 'package:trendy_movies/application/logger_prod_impl.dart';
+import 'package:trendy_movies/application/utils/platform_custom_injector/custom_injector_io.dart'
+    if (dart.library.html) 'package:trendy_movies/application/utils/platform_custom_injector/custom_injector_js.dart';
+import 'package:trendy_movies/database/database_service_impl.dart';
+import 'package:trendy_movies/domain/auth/i_auth_service.dart';
+import 'package:trendy_movies/domain/base_dependency_container.dart';
+import 'package:trendy_movies/domain/database.dart';
+import 'package:trendy_movies/domain/logger.dart';
+import 'package:trendy_movies/infrastructure/auth/firebase_auth_service.dart';
 
 class DependenciesContainer extends BaseDependencyInjector {
   @override

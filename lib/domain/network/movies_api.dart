@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:terndy_movies/presentation/home/domain/entity/movies_page_model.dart';
+import 'package:trendy_movies/presentation/home/domain/entity/movies_page_model.dart';
 
 part 'movies_api.g.dart';
 

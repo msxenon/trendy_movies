@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/presentation/login/logic/login_controller.dart';
+import 'package:trendy_movies/presentation/login/logic/login_controller.dart';
 
 class SubmitButton extends GetView<LoginController> {
   const SubmitButton({Key? key}) : super(key: key);

@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_loggy_dio/flutter_loggy_dio.dart';
-import 'package:terndy_movies/domain/network/movies_api.dart';
-import 'package:terndy_movies/presentation/home/domain/entity/movie_model.dart';
+import 'package:trendy_movies/domain/network/movies_api.dart';
+import 'package:trendy_movies/presentation/home/domain/entity/movie_model.dart';
 
 class CustomHttpClient {
   CustomHttpClient() {

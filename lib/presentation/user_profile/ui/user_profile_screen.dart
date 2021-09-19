@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/application/localisation/keys.dart';
-import 'package:terndy_movies/presentation/user_profile/logic/user_profile_controller.dart';
-import 'package:terndy_movies/presentation/user_profile/ui/user_profile_body.dart';
+import 'package:trendy_movies/application/localisation/keys.dart';
+import 'package:trendy_movies/presentation/user_profile/logic/user_profile_controller.dart';
+import 'package:trendy_movies/presentation/user_profile/ui/user_profile_body.dart';
 
 class UserProfileScreen extends GetWidget<UserProfileController> {
   const UserProfileScreen({Key? key}) : super(key: key);

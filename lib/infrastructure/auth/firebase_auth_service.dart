@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:terndy_movies/application/utils/nav_utils.dart';
-import 'package:terndy_movies/domain/auth/auth_entity.dart';
-import 'package:terndy_movies/domain/auth/auth_result.dart';
-import 'package:terndy_movies/domain/auth/auth_user_model.dart';
-import 'package:terndy_movies/domain/auth/i_auth_service.dart';
+import 'package:trendy_movies/application/utils/nav_utils.dart';
+import 'package:trendy_movies/domain/auth/auth_entity.dart';
+import 'package:trendy_movies/domain/auth/auth_result.dart';
+import 'package:trendy_movies/domain/auth/auth_user_model.dart';
+import 'package:trendy_movies/domain/auth/i_auth_service.dart';
 
 class FirebaseAuthService extends AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
