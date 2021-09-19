@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:terndy_movies/application/localisation/keys.dart';
 import 'package:terndy_movies/presentation/login/logic/login_controller.dart';
+import 'package:terndy_movies/presentation/login/ui/submit_button.dart';
+import 'package:terndy_movies/presentation/login/ui/toggle_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -10,58 +12,46 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GetBuilder<LoginController>(
-        builder: (controller) {
-          return Center(
-            child: AutofillGroup(
-              child: ListView(
-                shrinkWrap: true,
-                children: [
-                  if (controller.viewState.value.isRegister)
-                    TextField(
-                      autofillHints: const [AutofillHints.name],
-                      keyboardType: TextInputType.name,
-                      controller: controller.displayNameController,
-                      decoration: InputDecoration(
-                        hintText: Keys.User_Display_Name.trans,
-                        errorText: controller.validateDisplayName(),
-                      ),
-                    ),
+        builder: (controller) => Center(
+          child: AutofillGroup(
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                if (controller.viewState.value.isRegister)
                   TextField(
-                    autofillHints: const [AutofillHints.email],
-                    keyboardType: TextInputType.emailAddress,
-                    controller: controller.emailController,
+                    autofillHints: const [AutofillHints.name],
+                    keyboardType: TextInputType.name,
+                    controller: controller.displayNameController,
                     decoration: InputDecoration(
-                      hintText: Keys.User_Email.trans,
-                      errorText: controller.validateEmail(),
+                      hintText: Keys.User_Display_Name.trans,
+                      errorText: controller.validateDisplayName(),
                     ),
                   ),
-                  TextField(
-                    autofillHints: const [AutofillHints.password],
-                    keyboardType: TextInputType.visiblePassword,
-                    controller: controller.passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: Keys.User_Password.trans,
-                      errorText: controller.validatePassword(),
-                    ),
+                TextField(
+                  autofillHints: const [AutofillHints.email],
+                  keyboardType: TextInputType.emailAddress,
+                  controller: controller.emailController,
+                  decoration: InputDecoration(
+                    hintText: Keys.User_Email.trans,
+                    errorText: controller.validateEmail(),
                   ),
-                  ElevatedButton(
-                    onPressed: controller.submit,
-                    child: controller.viewState.value.isLogin
-                        ? Text(Keys.Actions_Sign_In.trans)
-                        : Text(Keys.Actions_Sign_Up.trans),
+                ),
+                TextField(
+                  autofillHints: const [AutofillHints.password],
+                  keyboardType: TextInputType.visiblePassword,
+                  controller: controller.passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: Keys.User_Password.trans,
+                    errorText: controller.validatePassword(),
                   ),
-                  ElevatedButton(
-                    onPressed: controller.toggleLogin,
-                    child: controller.viewState.value.isLogin
-                        ? Text(Keys.Actions_Q_Not_Registered_Yet.trans)
-                        : Text(Keys.Actions_Q_Already_Signed_Up.trans),
-                  ),
-                ],
-              ),
+                ),
+                const SubmitButton(),
+                const ToggleButton(),
+              ],
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

@@ -21,6 +21,12 @@ class LoginController extends GetxController with BaseToolBox {
   final TextEditingController passwordController =
       TextEditingController(text: '12345678');
 
+  String get toggleText => viewState.value.isLogin
+      ? Keys.Actions_Q_Not_Registered_Yet.trans
+      : Keys.Actions_Q_Already_Signed_Up.trans;
+  String get submitText => viewState.value.isLogin
+      ? Keys.Actions_Sign_In.trans
+      : Keys.Actions_Sign_Up.trans;
   Future<AuthSignInResult> _signIn() async {
     update();
     if (!_validateLogin()) {

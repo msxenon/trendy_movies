@@ -1,12 +1,16 @@
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:flutter_translate_annotations/flutter_translate_annotations.dart';
 
+/// @nodoc for you
 part 'keys.g.dart';
 
+/// @nodoc for you
 @TranslateKeysOptions(
   path: 'assets/i18n',
   caseStyle: CaseStyle.titleCase,
 )
+
+/// @nodoc for you
 class _$Keys // ignore: unused_element
 {}
 
