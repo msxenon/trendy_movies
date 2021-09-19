@@ -29,7 +29,7 @@ jobs:
         with:
           channel: 'stable' # 'dev', 'alpha', default to: 'stable'
       - run: |
-            cd ../../assets/ &&
+            cd ./assets/ &&
             echo "API_KEY={{$API_KEY}}" >> .env
             echo "AUTH_DOMAIN={{$AUTH_DOMAIN}}" >> .env
             echo "PROJECT_ID={{$PROJECT_ID}}" >> .env
