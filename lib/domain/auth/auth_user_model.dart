@@ -9,7 +9,7 @@ part 'auth_user_model.g.dart';
 class AuthUserModel with _$AuthUserModel {
   @HiveType(
       typeId: HiveAdaptersData.authUserModelTid,
-      adapterName: HiveAdaptersData.authUserModelName)
+      adapterName: HiveAdaptersData.authUserModelName,)
   const factory AuthUserModel.signedIn({
     @HiveField(0) required String id,
     @HiveField(1) required String displayName,

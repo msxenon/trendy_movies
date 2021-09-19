@@ -6,8 +6,9 @@ class LoggerDevImpl extends Logger {
   @override
   void onInit() {
     Loggy.initLoggy(
-        hierarchicalLogging: true,
-        logPrinter: const PrettyPrinter(showColors: true));
+      hierarchicalLogging: true,
+      logPrinter: const PrettyPrinter(showColors: true,),
+    );
   }
 
   @override

@@ -44,7 +44,7 @@ class MovieCard extends StatelessWidget {
                   _controller.state.value.toString(),
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

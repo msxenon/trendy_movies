@@ -26,9 +26,12 @@ class LoginController extends GetxController with BaseToolBox {
     if (!_validateLogin()) {
       return AuthSignInResult.error(Keys.Errors_All_Fields_Val.trans);
     }
+
     return authService.signInWithEmail(
       SignInEntity(
-          email: emailController.text, password: passwordController.text),
+        email: emailController.text,
+        password: passwordController.text,
+      ),
     );
   }
 
@@ -46,6 +49,7 @@ class LoginController extends GetxController with BaseToolBox {
     if (passwordController.text.isEmpty) {
       return Keys.Errors_Password_Empty.trans;
     }
+
     return null;
   }
 
@@ -53,6 +57,7 @@ class LoginController extends GetxController with BaseToolBox {
     if (!emailController.text.isEmail) {
       return Keys.Errors_Email_Val.trans;
     }
+
     return null;
   }
 
@@ -61,6 +66,7 @@ class LoginController extends GetxController with BaseToolBox {
         !displayNameController.text.isAlphabetOnly) {
       return Keys.Errors_Display_Name_Val.trans;
     }
+
     return null;
   }
 
@@ -83,13 +89,17 @@ class LoginController extends GetxController with BaseToolBox {
 
   void _onError(AuthRegisterError l) {
     var msgToShow = Keys.Errors_Unknown.trans;
-    l.when(weakPassword: () {
-      msgToShow = Keys.Errors_Weak_Password.trans;
-    }, emailAlreadyInUse: () {
-      msgToShow = Keys.Errors_Email_Already_In_Use.trans;
-    }, custom: (String x) {
-      msgToShow = x;
-    });
+    l.when(
+      weakPassword: () {
+        msgToShow = Keys.Errors_Weak_Password.trans;
+      },
+      emailAlreadyInUse: () {
+        msgToShow = Keys.Errors_Email_Already_In_Use.trans;
+      },
+      custom: (String x) {
+        msgToShow = x;
+      },
+    );
     logger.debug(msgToShow);
 
     Get.snackbar<void>(Keys.Errors_Error.trans, msgToShow);
@@ -97,11 +107,11 @@ class LoginController extends GetxController with BaseToolBox {
 
   Future<void> _onSignIn() async {
     final signInResult = await _signIn();
-    signInResult.when(
-        success: (s) {},
-        error: (e) {
-          Get.snackbar<void>(Keys.Errors_Error.trans, e);
-        });
+    signInResult.whenOrNull(
+      error: (e) {
+        Get.snackbar<void>(Keys.Errors_Error.trans, e);
+      },
+    );
   }
 
   Future<AuthRegisterResult> _register() async {
@@ -113,6 +123,7 @@ class LoginController extends GetxController with BaseToolBox {
         ),
       );
     }
+
     return authService.registerWithEmail(
       RegisterEntity(
         email: emailController.text,
@@ -128,8 +139,7 @@ class LoginController extends GetxController with BaseToolBox {
     register.when(
       success: (token) async {
         final signIn = await authService.signInWithToken(token);
-        signIn.when(
-          success: (s) {},
+        signIn.whenOrNull(
           error: (e) {
             Get.snackbar<void>(Keys.Errors_Error.trans, e);
           },

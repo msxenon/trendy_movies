@@ -36,7 +36,7 @@ class StateWidget extends StatelessWidget {
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

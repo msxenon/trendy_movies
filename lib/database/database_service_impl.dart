@@ -7,6 +7,7 @@ class DatabaseServiceImpl extends DatabaseService {
     await Hive.initFlutter();
     _registerAdapters();
     await _openAdapters();
+
     return;
   }
 

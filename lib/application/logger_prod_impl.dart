@@ -3,17 +3,27 @@ import 'package:terndy_movies/domain/logger.dart';
 class LoggerProdImpl extends Logger {
   ///here you can use sentry , crashlytics ... etc
   @override
-  void onInit() {}
+  void onInit() {
+    return;
+  }
 
   @override
-  void debug(String message, [Object? error, StackTrace? stackTrace]) {}
+  void debug(String message, [Object? error, StackTrace? stackTrace]) {
+    return;
+  }
 
   @override
-  void error(Object error, [StackTrace? stackTrace, String? message]) {}
+  void error(Object error, [StackTrace? stackTrace, String? message]) {
+    return;
+  }
 
   @override
-  void info(String message) {}
+  void info(String message) {
+    return;
+  }
 
   @override
-  void logWriter(String text, {bool? isError}) {}
+  void logWriter(String text, {bool? isError}) {
+    return;
+  }
 }

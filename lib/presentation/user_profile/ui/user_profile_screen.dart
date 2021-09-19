@@ -55,7 +55,7 @@ class UserProfileScreen extends GetWidget<UserProfileController> {
                 ),
                 SwitchListTile.adaptive(
                   value: controller.isDarkTheme,
-                  onChanged: controller.toggleTheme,
+                  onChanged: (v) => controller.toggleTheme(isDarkMode: v),
                   title: Text(Keys.App_Is_Dark_Theme.trans),
                 ),
                 ListTile(
@@ -63,7 +63,7 @@ class UserProfileScreen extends GetWidget<UserProfileController> {
                     onPressed: controller.authService.signOut,
                     child: Text(Keys.User_Sign_Out.trans),
                   ),
-                )
+                ),
               ],
             ),
           );

@@ -35,6 +35,7 @@ class HomeController extends GetxController
 
     if (xAbs + yAbs < 1) {
       backToDefault();
+
       return;
     }
     if (xAbs > yAbs) {
@@ -79,9 +80,11 @@ class HomeController extends GetxController
   MovieCardController? getCurrentMovieCard() {
     try {
       return Get.find<MovieCardController>(
-          tag: state!.results[index.value].id.toString());
+        tag: state!.results[index.value].id.toString(),
+      );
     } catch (e, s) {
       logger.error(e, s);
+
       return null;
     }
   }

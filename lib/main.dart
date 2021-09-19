@@ -20,8 +20,10 @@ void main() {
 }
 
 Future<void> _startUp() async {
-  var delegate = await LocalizationDelegate.create(
-      fallbackLocale: 'en_US', supportedLocales: ['en_US']);
+  final delegate = await LocalizationDelegate.create(
+    fallbackLocale: 'en_US',
+    supportedLocales: ['en_US'],
+  );
   await DependenciesContainer().init();
   runApp(LocalizedApp(delegate, const MyApp()));
 }
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget with BaseToolBox {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var localizationDelegate = LocalizedApp.of(context).delegate;
+    final localizationDelegate = LocalizedApp.of(context).delegate;
 
     return LocalizationProvider(
       state: LocalizationProvider.of(context).state,
@@ -40,7 +42,7 @@ class MyApp extends StatelessWidget with BaseToolBox {
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
-          localizationDelegate
+          localizationDelegate,
         ],
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
@@ -49,11 +51,11 @@ class MyApp extends StatelessWidget with BaseToolBox {
         locale: localizationDelegate.currentLocale,
         builder: (context, child) {
           return AnnotatedRegion<SystemUiOverlayStyle>(
-            child: child ?? const SizedBox.shrink(),
             value: !Get.isDarkMode
                 ? SystemUiOverlayStyle.dark
                 : SystemUiOverlayStyle.light
                     .copyWith(systemNavigationBarColor: Colors.white),
+            child: child ?? const SizedBox.shrink(),
           );
         },
         initialRoute: AppRoutes.mainRoute,

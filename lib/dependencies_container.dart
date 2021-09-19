@@ -21,12 +21,14 @@ class DependenciesContainer extends BaseDependencyInjector {
     await dotenv.load();
     platformCustomizedInjector();
     await super.init();
+
     return;
   }
 
   @override
   Future<void> setupMainServices() async {
     await Firebase.initializeApp();
+
     return super.setupMainServices();
   }
 

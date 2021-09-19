@@ -1,1 +1,3 @@
-void platformCustomizedInjector() {}
+void platformCustomizedInjector() {
+  return;
+}

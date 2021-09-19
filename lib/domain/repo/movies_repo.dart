@@ -12,6 +12,7 @@ abstract class MoviesRepo extends BaseService {
   @protected
   Future<List<Movie>> getMoviesFromApi() async {
     final moviesPage = await _moviesApiClient.getTodayTrendingMovies();
+
     return moviesPage.results;
   }
 

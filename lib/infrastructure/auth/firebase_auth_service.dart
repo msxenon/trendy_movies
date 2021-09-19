@@ -51,9 +51,12 @@ class FirebaseAuthService extends AuthService {
   ) async {
     try {
       final user = await _auth.createUserWithEmailAndPassword(
-          email: registerEntity.email, password: registerEntity.password);
+        email: registerEntity.email,
+        password: registerEntity.password,
+      );
       await updateDisplayName(registerEntity.displayName);
       final token = user.user!.refreshToken!;
+
       return AuthRegisterResult.success(
         token,
       );
@@ -73,6 +76,7 @@ class FirebaseAuthService extends AuthService {
       }
     } catch (e, s) {
       logger.error(e, s);
+
       return AuthRegisterResult.error(
         AuthRegisterError.custom(
           e.toString(),
@@ -87,12 +91,14 @@ class FirebaseAuthService extends AuthService {
   ) async {
     try {
       final user = await _auth.signInWithEmailAndPassword(
-          email: emailSignInEntity.email, password: emailSignInEntity.password);
+        email: emailSignInEntity.email,
+        password: emailSignInEntity.password,
+      );
       final userModel = AuthUserModel.signedIn(
         id: user.user!.uid,
         displayName: _getDisplayNameFromCreds(user),
       );
-      // authStateChanges(userModel);
+
       return AuthSignInResult.success(
         userModel,
       );
@@ -102,6 +108,7 @@ class FirebaseAuthService extends AuthService {
       );
     } catch (e, s) {
       logger.error(e, s);
+
       return AuthSignInResult.error(
         e.toString(),
       );
@@ -117,7 +124,7 @@ class FirebaseAuthService extends AuthService {
         id: user.user!.uid,
         displayName: _getDisplayNameFromCreds(user),
       );
-      // authStateChanges(userModel);
+
       return AuthSignInResult.success(
         userModel,
       );
@@ -127,6 +134,7 @@ class FirebaseAuthService extends AuthService {
       );
     } catch (e, s) {
       logger.error(e, s);
+
       return AuthSignInResult.error(
         e.toString(),
       );
@@ -135,7 +143,7 @@ class FirebaseAuthService extends AuthService {
 
   @override
   Future<void> signOut() async {
-    NavUtils.loadFromMainRoute();
+    loadFromMainRoute();
     await 50.milliseconds.delay();
 
     await _auth.signOut();
@@ -154,17 +162,17 @@ class FirebaseAuthService extends AuthService {
   }
 
   @override
-  Future<void> updateDisplayName(String displayName,
-      {bool refreshUI = false}) async {
+  Future<void> updateDisplayName(
+    String displayName, {
+    bool refreshUI = false,
+  }) async {
     await _auth.currentUser?.updateDisplayName(displayName);
-    // if (refreshUI) {
-    //   Get.forceAppUpdate();
-    // }
+
     return;
   }
 
   @override
   void navigateOnSignedIn() {
-    NavUtils.continueAsLoggedIn();
+    continueAsLoggedIn();
   }
 }

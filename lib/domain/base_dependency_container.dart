@@ -12,6 +12,7 @@ abstract class BaseDependencyInjector {
   @mustCallSuper
   Future<void> init() async {
     await setupMainServices();
+
     return;
   }
 
@@ -21,6 +22,7 @@ abstract class BaseDependencyInjector {
     await Get.putAsync<DatabaseService>(() async {
       final x = databaseService();
       await x.initDb();
+
       return x;
     });
     Get.put(authService());

@@ -21,6 +21,7 @@ abstract class MoviesRepo {
   @protected
   Future<List<Movie>> getMoviesFromApi() async {
     final moviesPage = await _moviesApiClient.getTodayTrendingMovies();
+
     return moviesPage.results;
   }
 

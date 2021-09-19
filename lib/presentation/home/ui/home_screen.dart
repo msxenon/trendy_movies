@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget with BaseToolBox {
         title: Obx(
           () => Text(
             Keys.App_Welcome_User_Name.transArgs(
-              {
+              <String, dynamic>{
                 'name': authService.signedInUserModel.value.displayName,
               },
             ),
@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget with BaseToolBox {
             alignment: Alignment.center,
             child: InkWell(
               child: const UserAvatar(),
-              onTap: () => Get.toNamed(AppRoutes.userProfile),
+              onTap: () => Get.toNamed<void>(AppRoutes.userProfile),
             ),
           ),
         ],

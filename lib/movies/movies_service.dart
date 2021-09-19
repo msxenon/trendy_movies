@@ -33,10 +33,8 @@ class HomeRepository implements IHomeRepository {
   Future<MoviesPageModel> getCases() async {
     final cases = await provider.getCases();
 
-    if (cases.status.hasError) {
-      return Future.error(cases.statusText!);
-    } else {
-      return cases.body!;
-    }
+    return cases.status.hasError
+        ? throw Exception(cases.statusText)
+        : cases.body!;
   }
 }

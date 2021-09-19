@@ -46,15 +46,17 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                      onPressed: controller.submit,
-                      child: controller.viewState.value.isLogin
-                          ? Text(Keys.Actions_Sign_In.trans)
-                          : Text(Keys.Actions_Sign_Up.trans)),
+                    onPressed: controller.submit,
+                    child: controller.viewState.value.isLogin
+                        ? Text(Keys.Actions_Sign_In.trans)
+                        : Text(Keys.Actions_Sign_Up.trans),
+                  ),
                   ElevatedButton(
-                      onPressed: controller.toggleLogin,
-                      child: controller.viewState.value.isLogin
-                          ? Text(Keys.Actions_Q_Not_Registered_Yet.trans)
-                          : Text(Keys.Actions_Q_Already_Signed_Up.trans))
+                    onPressed: controller.toggleLogin,
+                    child: controller.viewState.value.isLogin
+                        ? Text(Keys.Actions_Q_Not_Registered_Yet.trans)
+                        : Text(Keys.Actions_Q_Already_Signed_Up.trans),
+                  ),
                 ],
               ),
             ),
