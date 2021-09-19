@@ -28,8 +28,6 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'stable' # 'dev', 'alpha', default to: 'stable'
-
-      - name: Create .Env
       - run: |
             cd ../../assets/ &&
             echo "API_KEY={{$API_KEY}}" >> .env
