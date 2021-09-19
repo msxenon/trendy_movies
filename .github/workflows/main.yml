@@ -28,16 +28,16 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'stable' # 'dev', 'alpha', default to: 'stable'
-      - run: |
-            cd ./assets/ &&
-            echo "API_KEY={{$API_KEY}}" >> .env
-            echo "AUTH_DOMAIN={{$AUTH_DOMAIN}}" >> .env
-            echo "PROJECT_ID={{$PROJECT_ID}}" >> .env
-            echo "STORAGE_BUCKET={{$STORAGE_BUCKET}}" >> .env
-            echo "MESSAGING_SENDER_ID={{$MESSAGING_SENDER_ID}}" >> .env
-            echo "APP_ID={{$APP_ID}}" >> .env
-            echo "MEASUREMENT_ID={{$MEASUREMENT_ID}}" >> .env
-            echo "THE_MOVIEDB_API_KEY={{$THE_MOVIEDB_API_KEY}}" >> .env
+#      - run: |
+#            cd ./assets/ &&
+#            echo "API_KEY={{$API_KEY}}" >> .env
+#            echo "AUTH_DOMAIN={{$AUTH_DOMAIN}}" >> .env
+#            echo "PROJECT_ID={{$PROJECT_ID}}" >> .env
+#            echo "STORAGE_BUCKET={{$STORAGE_BUCKET}}" >> .env
+#            echo "MESSAGING_SENDER_ID={{$MESSAGING_SENDER_ID}}" >> .env
+#            echo "APP_ID={{$APP_ID}}" >> .env
+#            echo "MEASUREMENT_ID={{$MEASUREMENT_ID}}" >> .env
+#            echo "THE_MOVIEDB_API_KEY={{$THE_MOVIEDB_API_KEY}}" >> .env
 
     #      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
 
