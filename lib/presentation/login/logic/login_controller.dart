@@ -4,6 +4,7 @@ import 'package:trendy_movies/application/localisation/keys.dart';
 import 'package:trendy_movies/domain/auth/auth_entity.dart';
 import 'package:trendy_movies/domain/auth/auth_result.dart';
 import 'package:trendy_movies/domain/base_dependency_container.dart';
+import 'package:trendy_movies/presentation/main_app/trendy_app.dart';
 
 enum LoginViewState { login, register, reset }
 
@@ -79,8 +80,10 @@ class LoginController extends GetxController with BaseToolBox {
   void toggleLogin() {
     if (viewState.value.isLogin) {
       viewState(LoginViewState.register);
+      setPageTitle(Keys.Actions_Sign_Up.trans);
     } else {
       viewState(LoginViewState.login);
+      setPageTitle(Keys.Actions_Sign_In.trans);
     }
     update();
   }

@@ -9,7 +9,7 @@
     "sign_in": "Sign In",
     "sign_up": "Sign Up",
     "q_not_registered_yet": "Not registered yet?",
-    "q_already_signed_up": "Already have a login credentials?",
+    "q_already_signed_up": "Already have a user credentials?",
     "movies": {
       "seen": "Seen",
       "never": "Never",
@@ -18,7 +18,8 @@
     }
   },
   "route_titles": {
-    "sign": "Sign in/up",
+    "sign_in": "Sign in",
+    "sign_up": "Sign in/up",
     "home": "Home",
     "main_route": "Loading",
     "unknown": "Unknown",

@@ -1,15 +1,17 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:get/get.dart';
+import 'package:trendy_movies/application/localisation/keys.dart';
 import 'package:trendy_movies/application/utils/app_routes.dart';
 import 'package:trendy_movies/application/utils/middlewares/splash_middleware.dart';
 import 'package:trendy_movies/domain/base_dependency_container.dart';
 import 'package:trendy_movies/presentation/home/ui/home_screen.dart';
 import 'package:trendy_movies/presentation/login/logic/login_screen_bindings.dart';
 import 'package:trendy_movies/presentation/login/ui/login_screen.dart';
-import 'package:trendy_movies/presentation/main_app/utils/app_annotated_region.dart';
-import 'package:trendy_movies/presentation/main_app/utils/title_gen.dart';
+import 'package:trendy_movies/presentation/main_app/app_annotated_region.dart';
 import 'package:trendy_movies/presentation/splash/splash_screen.dart';
 import 'package:trendy_movies/presentation/user_profile/logic/user_profile_bindings.dart';
 import 'package:trendy_movies/presentation/user_profile/ui/user_profile_screen.dart';
@@ -18,6 +20,7 @@ class TrendyApp extends StatelessWidget with BaseToolBox {
   TrendyApp({Key? key}) : super(key: key);
   final _pages = [
     GetPage<void>(
+      title: Keys.Route_Titles_Main_Route.trans,
       name: AppRoutes.mainRoute,
       page: () => const SplashScreen(),
       middlewares: [
@@ -25,6 +28,7 @@ class TrendyApp extends StatelessWidget with BaseToolBox {
       ],
     ),
     GetPage<void>(
+      title: Keys.Actions_Sign_In.trans,
       name: AppRoutes.sign,
       page: () => const LoginScreen(),
       bindings: [
@@ -32,6 +36,7 @@ class TrendyApp extends StatelessWidget with BaseToolBox {
       ],
     ),
     GetPage<void>(
+      title: Keys.Route_Titles_Home.trans,
       name: AppRoutes.home,
       page: () => const HomeScreen(),
       transition: Transition.noTransition,
@@ -54,7 +59,7 @@ class TrendyApp extends StatelessWidget with BaseToolBox {
     return LocalizationProvider(
       state: LocalizationProvider.of(context).state,
       child: GetMaterialApp(
-        onGenerateTitle: (_) => generateTitle(),
+        title: Keys.App_Name.trans,
         logWriterCallback: logger.logWriter,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
@@ -72,7 +77,45 @@ class TrendyApp extends StatelessWidget with BaseToolBox {
         initialRoute: AppRoutes.mainRoute,
         getPages: _pages,
         enableLog: true,
+        defaultGlobalState: true,
+        opaqueRoute: false,
+        routingCallback: kIsWeb
+            ? (r) {
+                final canSetTitle =
+                    r?.route?.isActive == true && r?.route?.isCurrent == true;
+                final routeName = r?.current;
+                if (canSetTitle && routeName != null) {
+                  String? title;
+                  switch (routeName) {
+                    case AppRoutes.home:
+                      title = Keys.Route_Titles_Home.trans;
+                      break;
+                    case AppRoutes.mainRoute:
+                      title = Keys.Route_Titles_Main_Route.trans;
+                      break;
+                    case AppRoutes.sign:
+                      title = Keys.Actions_Sign_In.trans;
+                      break;
+                    case AppRoutes.userProfile:
+                      title = Keys.Route_Titles_Profile.trans;
+                      break;
+                  }
+                  if (title != null) {
+                    setPageTitle(title);
+                  }
+                }
+              }
+            : null,
       ),
     );
   }
+}
+
+// This function is used to update the page title on web
+void setPageTitle(String title) {
+  SystemChrome.setApplicationSwitcherDescription(ApplicationSwitcherDescription(
+    label: title,
+    primaryColor:
+        Theme.of(Get.context!).primaryColor.value, // This line is required
+  ));
 }
