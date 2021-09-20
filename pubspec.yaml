@@ -16,7 +16,6 @@ dependencies:
   firebase_auth: ^3.1.1
   firebase_core: ^1.6.0
   flutter_swipecards: ^0.2.1
-  flutter_dotenv: ^5.0.2
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -69,5 +68,4 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - .env
     - assets/i18n/
