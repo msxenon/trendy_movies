@@ -40,7 +40,7 @@ class FirebaseAuthService extends AuthService {
       if (isLoggedIn) {
         navigateOnSignedIn();
       } else {
-        signOut();
+        onSignOut();
       }
     });
   }
@@ -143,11 +143,12 @@ class FirebaseAuthService extends AuthService {
 
   @override
   Future<void> signOut() async {
-    loadFromMainRoute();
-    await 50.milliseconds.delay();
-
     await _auth.signOut();
     await super.signOut();
+  }
+
+  void onSignOut() {
+    loadFromMainRoute();
   }
 
   String _getDisplayNameFromCreds(UserCredential user) {
