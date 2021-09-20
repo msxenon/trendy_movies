@@ -3,7 +3,7 @@ import 'package:trendy_movies/application/utils/app_routes.dart';
 
 void loadFromMainRoute() {
   if (Get.context != null) {
-    Get.offAndToNamed<void>(
+    Get.offAllNamed<void>(
       AppRoutes.mainRoute,
     );
   }
