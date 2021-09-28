@@ -8,7 +8,6 @@ void main() {
 }
 
 Future<void> _startUp() async {
-  // setUrlStrategy(PathUrlStrategy());
   final delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en_US',
     supportedLocales: ['en_US'],

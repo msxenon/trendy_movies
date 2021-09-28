@@ -3,9 +3,12 @@
 import 'dart:html' as html;
 import 'dart:js' as js;
 
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:trendy_movies/src/application/utils/environment_config.dart';
 
 void platformCustomizedInjector() {
+  setUrlStrategy(PathUrlStrategy());
+
   //To expone the dart variable to global js code
   js.context['apiKey'] = EnvironmentConfig.apiKey;
   js.context['authDomain'] = EnvironmentConfig.authDomain;

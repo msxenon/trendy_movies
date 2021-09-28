@@ -18,8 +18,8 @@ dependencies:
   flutter_swipecards: ^0.2.1
   flutter:
     sdk: flutter
-#  flutter_web_plugins:
-#    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
   flutter_localizations:
     sdk: flutter
   freezed_annotation: ^0.14.3
