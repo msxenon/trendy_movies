@@ -198,12 +198,12 @@ packages:
     source: hosted
     version: "1.0.1"
   dart_code_metrics:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: dart_code_metrics
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.3.1"
+    version: "4.3.3"
   dart_style:
     dependency: transitive
     description:
@@ -319,13 +319,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_loggy_dio:
-    dependency: "direct main"
-    description:
-      name: flutter_loggy_dio
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0+3"
   flutter_swipecards:
     dependency: "direct main"
     description:
@@ -360,7 +353,7 @@ packages:
     source: hosted
     version: "2.0.0"
   flutter_web_plugins:
-    dependency: "direct main"
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -482,7 +475,7 @@ packages:
       name: json_serializable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.1"
+    version: "5.0.2"
   lints:
     dependency: transitive
     description:
@@ -602,6 +595,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.0"
+  pretty_dio_logger:
+    dependency: "direct main"
+    description:
+      name: pretty_dio_logger
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.0-beta-1"
   process:
     dependency: transitive
     description:
