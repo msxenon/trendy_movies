@@ -33,11 +33,12 @@ class LoggerDevImpl extends Logger {
   }
 
   @override
-  void error(
-      {String? message,
-      Object? error,
-      StackTrace? stackTrace,
-      bool isFatalError = false}) {
+  void error({
+    String? message,
+    Object? error,
+    StackTrace? stackTrace,
+    bool isFatalError = false,
+  }) {
     _logger.error(message, error, stackTrace);
   }
 }

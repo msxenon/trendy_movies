@@ -26,6 +26,7 @@ abstract class Logger {
     StackTrace? stackTrace,
     bool isFatalError = false,
   }) {
-    ///Not used in the current app
+    ///not used yet
+    return;
   }
 }
