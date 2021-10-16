@@ -7,7 +7,7 @@ class ToggleButton extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return TextButton(
       onPressed: controller.toggleLogin,
       child: Text(controller.toggleText),
     );

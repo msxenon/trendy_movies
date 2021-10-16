@@ -1,54 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trendy_movies/src/application/localisation/keys.dart';
+import 'package:trendy_movies/src/application/widgets/app_logo.dart';
 import 'package:trendy_movies/src/presentation/login/logic/login_controller.dart';
-import 'package:trendy_movies/src/presentation/login/ui/submit_button.dart';
-import 'package:trendy_movies/src/presentation/login/ui/toggle_button.dart';
+import 'package:trendy_movies/src/presentation/login/ui/widgets/sign_form.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends GetResponsiveView<LoginController> {
+  LoginScreen({Key? key}) : super(key: key);
+  @override
+  bool get alwaysUseBuilder => true;
+  @override
+  Widget? phone() {
+    return Column(
+      children: const [
+        AppLogo(
+          showAppName: true,
+        ),
+        SignForm(),
+      ],
+    );
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget? desktop() {
+    return Row(
+      children: const [
+        AppLogo(
+          showAppName: true,
+        ),
+        SignForm(),
+      ],
+    );
+  }
+
+  @override
+  Widget? builder() {
     return Scaffold(
       body: GetBuilder<LoginController>(
         builder: (controller) => Center(
-          child: AutofillGroup(
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                if (controller.viewState.value.isRegister)
-                  TextField(
-                    autofillHints: const [AutofillHints.name],
-                    keyboardType: TextInputType.name,
-                    controller: controller.displayNameController,
-                    decoration: InputDecoration(
-                      hintText: Keys.User_Display_Name.trans,
-                      errorText: controller.validateDisplayName(),
-                    ),
-                  ),
-                TextField(
-                  autofillHints: const [AutofillHints.email],
-                  keyboardType: TextInputType.emailAddress,
-                  controller: controller.emailController,
-                  decoration: InputDecoration(
-                    hintText: Keys.User_Email.trans,
-                    errorText: controller.validateEmail(),
-                  ),
-                ),
-                TextField(
-                  autofillHints: const [AutofillHints.password],
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: controller.passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: Keys.User_Password.trans,
-                    errorText: controller.validatePassword(),
-                  ),
-                ),
-                const SubmitButton(),
-                const ToggleButton(),
-              ],
+          child: SingleChildScrollView(
+            child: AutofillGroup(
+              child: screen.isDesktop ? desktop()! : phone()!,
             ),
           ),
         ),

@@ -15,12 +15,6 @@ Future<void> _startUp() async {
 }
 
 Future<void> _runApp() async {
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.transparent,
-      statusBarColor: Colors.transparent,
-    ),
-  );
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   final delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en_US',

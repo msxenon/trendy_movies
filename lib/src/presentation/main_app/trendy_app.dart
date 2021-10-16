@@ -30,7 +30,7 @@ class TrendyApp extends StatelessWidget with BaseToolBox {
     GetPage<void>(
       title: Keys.Actions_Sign_In.trans,
       name: AppRoutes.sign,
-      page: () => const LoginScreen(),
+      page: () => LoginScreen(),
       bindings: [
         LoginScreenBindings(),
       ],
@@ -66,6 +66,20 @@ class TrendyApp extends StatelessWidget with BaseToolBox {
           GlobalWidgetsLocalizations.delegate,
           localizationDelegate,
         ],
+        builder: (_, widget) {
+          final invertedBrightness =
+              Get.isDarkMode ? Brightness.light : Brightness.dark;
+          SystemChrome.setSystemUIOverlayStyle(
+            SystemUiOverlayStyle(
+              systemNavigationBarColor: Colors.transparent,
+              statusBarColor: Colors.transparent,
+              statusBarIconBrightness: invertedBrightness,
+              systemNavigationBarIconBrightness: invertedBrightness,
+            ),
+          );
+
+          return widget ?? const SizedBox.shrink();
+        },
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         themeMode: Get.isDarkMode ? ThemeMode.dark : ThemeMode.light,

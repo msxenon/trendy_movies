@@ -18,11 +18,12 @@ class LoggerProdImpl extends Logger {
   }
 
   @override
-  void error(
-      {String? message,
-      Object? error,
-      StackTrace? stackTrace,
-      bool isFatalError = false}) {
+  void error({
+    String? message,
+    Object? error,
+    StackTrace? stackTrace,
+    bool isFatalError = false,
+  }) {
     return;
   }
 
