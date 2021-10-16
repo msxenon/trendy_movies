@@ -83,7 +83,7 @@ class HomeController extends GetxController
         tag: state![index.value].id.toString(),
       );
     } catch (e, s) {
-      logger.error(e, s);
+      logger.error(error: e, stackTrace: s);
 
       return null;
     }

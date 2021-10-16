@@ -13,17 +13,21 @@ class LoggerProdImpl extends Logger {
   }
 
   @override
-  void error(Object error, [StackTrace? stackTrace, String? message]) {
-    return;
-  }
-
-  @override
-  void info(String message) {
-    return;
-  }
-
-  @override
   void logWriter(String text, {bool? isError}) {
+    return;
+  }
+
+  @override
+  void error(
+      {String? message,
+      Object? error,
+      StackTrace? stackTrace,
+      bool isFatalError = false}) {
+    return;
+  }
+
+  @override
+  void info(String message, {bool sendRemote = false}) {
     return;
   }
 }

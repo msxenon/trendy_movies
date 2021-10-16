@@ -12,7 +12,6 @@ import 'package:trendy_movies/src/presentation/home/logic/home_bindings.dart';
 import 'package:trendy_movies/src/presentation/home/ui/home_screen.dart';
 import 'package:trendy_movies/src/presentation/login/logic/login_screen_bindings.dart';
 import 'package:trendy_movies/src/presentation/login/ui/login_screen.dart';
-import 'package:trendy_movies/src/presentation/main_app/app_annotated_region.dart';
 import 'package:trendy_movies/src/presentation/splash/splash_screen.dart';
 import 'package:trendy_movies/src/presentation/user_profile/logic/user_profile_bindings.dart';
 import 'package:trendy_movies/src/presentation/user_profile/ui/user_profile_screen.dart';
@@ -72,12 +71,6 @@ class TrendyApp extends StatelessWidget with BaseToolBox {
         themeMode: Get.isDarkMode ? ThemeMode.dark : ThemeMode.light,
         supportedLocales: localizationDelegate.supportedLocales,
         locale: localizationDelegate.currentLocale,
-        builder: (context, child) {
-          return AppAnnotatedRegion(
-            child: child,
-            key: Key('nbrt'),
-          );
-        },
         initialRoute: AppRoutes.mainRoute,
         getPages: _pages,
         enableLog: true,

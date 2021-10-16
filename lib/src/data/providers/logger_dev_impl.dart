@@ -19,11 +19,6 @@ class LoggerDevImpl extends Logger {
   }
 
   @override
-  void error(Object error, [StackTrace? stackTrace, String? message]) {
-    _logger.error(message, error, stackTrace);
-  }
-
-  @override
   void logWriter(String text, {bool? isError}) {
     if (isError == true) {
       _logger.warning(error);
@@ -33,7 +28,16 @@ class LoggerDevImpl extends Logger {
   }
 
   @override
-  void info(String message) {
+  void info(String message, {bool sendRemote = false}) {
     _logger.info(message);
+  }
+
+  @override
+  void error(
+      {String? message,
+      Object? error,
+      StackTrace? stackTrace,
+      bool isFatalError = false}) {
+    _logger.error(message, error, stackTrace);
   }
 }

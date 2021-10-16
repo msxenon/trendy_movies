@@ -29,6 +29,8 @@ abstract class BaseDependencyInjector {
   }
 }
 
+BaseToolBox get di => BaseToolBox();
+
 class BaseToolBox {
   AuthRepo get authService => Get.find();
   DatabaseService get database => Get.find();

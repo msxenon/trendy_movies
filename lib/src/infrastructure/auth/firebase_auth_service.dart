@@ -75,7 +75,7 @@ class FirebaseAuthService extends AuthRepo {
         );
       }
     } catch (e, s) {
-      logger.error(e, s);
+      logger.error(error: e, stackTrace: s);
 
       return AuthRegisterResult.error(
         AuthRegisterError.custom(
@@ -107,7 +107,7 @@ class FirebaseAuthService extends AuthRepo {
         e.message ?? e.code,
       );
     } catch (e, s) {
-      logger.error(e, s);
+      logger.error(error: e, stackTrace: s);
 
       return AuthSignInResult.error(
         e.toString(),
@@ -133,7 +133,7 @@ class FirebaseAuthService extends AuthRepo {
         e.message ?? e.code,
       );
     } catch (e, s) {
-      logger.error(e, s);
+      logger.error(error: e, stackTrace: s);
 
       return AuthSignInResult.error(
         e.toString(),
