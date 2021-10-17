@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget with BaseToolBox {
           ),
         ],
       ),
-      body: const TrendyMoviesPage(),
+      body: TrendyMoviesPage(),
     );
   }
 }

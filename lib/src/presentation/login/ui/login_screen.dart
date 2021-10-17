@@ -5,9 +5,12 @@ import 'package:trendy_movies/src/presentation/login/logic/login_controller.dart
 import 'package:trendy_movies/src/presentation/login/ui/widgets/sign_form.dart';
 
 class LoginScreen extends GetResponsiveView<LoginController> {
-  LoginScreen({Key? key}) : super(key: key);
-  @override
-  bool get alwaysUseBuilder => true;
+  LoginScreen({Key? key})
+      : super(
+          alwaysUseBuilder: true,
+          key: key,
+        );
+
   @override
   Widget? phone() {
     return SingleChildScrollView(
