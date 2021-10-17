@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:trendy_movies/src/database/hive_adapters_ids.dart';
+import 'package:trendy_movies/src/application/services/database/hive_adapters_ids.dart';
 
 part 'auth_user_model.freezed.dart';
 part 'auth_user_model.g.dart';

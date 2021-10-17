@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:trendy_movies/src/application/services/database/hive_database_service.dart';
 import 'package:trendy_movies/src/domain/providers/logger.dart';
-import 'package:trendy_movies/src/domain/repo/database.dart';
+import 'package:trendy_movies/src/domain/services/base_database_service.dart';
 import 'package:trendy_movies/src/domain/services/i_auth_service.dart';
 
 abstract class BaseDependencyInjector {
@@ -18,14 +19,10 @@ abstract class BaseDependencyInjector {
 
   @mustCallSuper
   Future<void> setupMainServices() async {
-    Get.put<Logger>(logger);
-    await Get.putAsync<DatabaseService>(() async {
-      final x = databaseService();
-      await x.initDb();
-
-      return x;
-    });
-    Get.put(authService());
+    Get
+      ..put<Logger>(logger)
+      ..lazyPut<DatabaseService>(databaseService)
+      ..put(authService());
   }
 }
 
@@ -33,6 +30,6 @@ BaseToolBox get di => BaseToolBox();
 
 class BaseToolBox {
   AuthRepo get authService => Get.find();
-  DatabaseService get database => Get.find();
+  AppDatabaseService get database => Get.find();
   Logger get logger => Get.find();
 }
