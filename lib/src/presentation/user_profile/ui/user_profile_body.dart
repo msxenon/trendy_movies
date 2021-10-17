@@ -20,6 +20,7 @@ class UserProfileBody extends GetView<UserProfileController> {
               Container(
                 alignment: Alignment.center,
                 child: UserAvatar(
+                  clickable: false,
                   size: Get.width / 2,
                 ),
               ),

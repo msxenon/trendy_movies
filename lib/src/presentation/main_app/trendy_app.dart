@@ -38,7 +38,7 @@ class TrendyApp extends StatelessWidget with BaseToolBox {
     GetPage<void>(
       title: Keys.Route_Titles_Home.trans,
       name: AppRoutes.home,
-      page: () => const HomeScreen(),
+      page: () => HomeScreen(),
       transition: Transition.noTransition,
       bindings: [
         HomeScreenBindings(),
