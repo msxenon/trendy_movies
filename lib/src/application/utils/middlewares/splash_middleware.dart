@@ -8,6 +8,10 @@ class SplashMiddleware extends GetMiddleware with BaseToolBox {
   @override
   RouteSettings? redirect(String? route) {
     if (authService.isLoggedIn) {
+      if (!database.dbInitialized.value) {
+        return const RouteSettings(name: AppRoutes.sign);
+      }
+
       return const RouteSettings(name: AppRoutes.home);
     } else if (route != AppRoutes.sign) {
       return const RouteSettings(name: AppRoutes.sign);

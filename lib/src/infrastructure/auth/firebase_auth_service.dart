@@ -19,7 +19,7 @@ class FirebaseAuthService extends AuthRepo {
 
   void _userStateListener() {
     _auth.userChanges().listen(
-      (User? user) {
+      (User? user) async {
         if (user == null) {
           authStateChanges(const AuthUserModel.unknown());
         } else {
@@ -27,6 +27,8 @@ class FirebaseAuthService extends AuthRepo {
             id: user.uid,
             displayName: _getDisplayNameFromUser(user) ?? 'Unknown',
           );
+          await database.initializeDB(user.uid);
+
           authStateChanges(userAuthModel);
         }
       },

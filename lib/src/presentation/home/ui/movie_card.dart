@@ -4,17 +4,22 @@ import 'package:trendy_movies/src/presentation/home/domain/entity/movie_model.da
 import 'package:trendy_movies/src/presentation/home/logic/movie_card_controller.dart';
 import 'package:trendy_movies/src/presentation/home/ui/movie_card_state_widget.dart';
 
-class MovieCard extends StatelessWidget {
+class MovieCard extends GetView<MovieCardController> {
   MovieCard({
     Key? key,
     required this.item,
-  }) : super(key: key);
+  })  : _controller = Get.put(
+          MovieCardController(),
+          tag: item.id!.toString(),
+        ),
+        super(key: key);
 
   final Movie item;
-  late final MovieCardController _controller = Get.put(
-    MovieCardController(),
-    tag: item.id!.toString(),
-  );
+  final MovieCardController _controller;
+  @override
+  MovieCardController get controller => _controller;
+  @override
+  String? get tag => item.id!.toString();
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -31,7 +36,7 @@ class MovieCard extends StatelessWidget {
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                    'https://image.tmdb.org/t/p/original/${item.backdropPath}',
+                    'https://image.tmdb.org/t/p/original/${item.posterPath}',
                   ),
                 ),
               ),
@@ -39,9 +44,9 @@ class MovieCard extends StatelessWidget {
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 250),
               child: MovieCardStateWidget(
-                state: _controller.state.value,
+                state: controller.state.value,
                 key: Key(
-                  _controller.state.value.toString(),
+                  controller.state.value.toString(),
                 ),
               ),
             ),

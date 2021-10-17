@@ -1,11 +1,10 @@
 import 'package:get/get.dart';
-
-enum MovieCardState { watchList, never, maybeLater, seen, defaultState }
+import 'package:trendy_movies/src/application/models/movie_category.dart';
 
 class MovieCardController extends GetxController {
-  final Rx<MovieCardState> state = MovieCardState.defaultState.obs;
+  final Rxn<MovieCategory> state = Rxn<MovieCategory>();
 
-  void setState(MovieCardState newState) {
+  void setState(MovieCategory? newState) {
     state(newState);
   }
 }

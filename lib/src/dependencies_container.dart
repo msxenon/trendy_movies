@@ -39,5 +39,5 @@ class DependenciesContainer extends BaseDependencyInjector {
       () => DatabaseServiceImpl();
 
   @override
-  Logger get logger => kReleaseMode ? LoggerProdImpl() : LoggerDevImpl();
+  LoggerService get logger => kReleaseMode ? LoggerProdImpl() : LoggerDevImpl();
 }

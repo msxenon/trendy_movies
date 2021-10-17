@@ -1,32 +1,31 @@
-import 'package:loggy/loggy.dart';
-import 'package:trendy_movies/src/application/utils/error_catcher/log_printer.dart';
+import 'package:flutter/foundation.dart';
+import 'package:logger/logger.dart';
 import 'package:trendy_movies/src/domain/providers/logger.dart';
 
-class LoggerDevImpl extends Logger {
-  late final _logger = Loggy<GlobalLoggy>('Dev');
-  @override
-  void onInit() {
-    Loggy.initLoggy(
-      logOptions: const LogOptions(
-        LogLevel.all,
-        stackTraceLevel: LogLevel.all,
-        includeCallerInfo: true,
-        callerFrameDepthLevel: 10000000,
-      ),
-      hierarchicalLogging: true,
-      logPrinter: const CustomLogPrinter(),
-    );
-  }
+class LoggerDevImpl extends LoggerService {
+  LoggerDevImpl()
+      : _logger = Logger(
+          filter: kDebugMode ? DevelopmentFilter() : ProductionFilter(),
+          printer: PrettyPrinter(
+            printTime: true,
+            methodCount: 4,
+            lineLength: 80,
+          ),
+        );
+  final Logger _logger;
 
   @override
   void debug(String message, [Object? error, StackTrace? stackTrace]) {
-    _logger.debug(message, error, stackTrace);
+    _logger.d(message, error, stackTrace);
   }
 
   @override
   void logWriter(String text, {bool? isError}) {
+    if (text == 'null') {
+      return;
+    }
     if (isError == true) {
-      _logger.warning(error);
+      _logger.w(text);
     } else {
       info(text);
     }
@@ -34,7 +33,7 @@ class LoggerDevImpl extends Logger {
 
   @override
   void info(String message, {bool sendRemote = false}) {
-    _logger.info(message);
+    _logger.i(message);
   }
 
   @override
@@ -44,6 +43,6 @@ class LoggerDevImpl extends Logger {
     StackTrace? stackTrace,
     bool isFatalError = false,
   }) {
-    _logger.error(message, error, stackTrace);
+    _logger.e(message, error, stackTrace);
   }
 }

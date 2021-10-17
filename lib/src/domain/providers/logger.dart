@@ -1,11 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-abstract class Logger {
-  Logger() {
-    onInit();
-  }
-
-  void onInit();
+abstract class LoggerService {
   void error({
     String? message,
     Object? error,

@@ -15,4 +15,7 @@ enum MovieCategory {
   @JsonValue('seen')
   @HiveField(2)
   seen,
+  @JsonValue('never')
+  @HiveField(3)
+  never,
 }

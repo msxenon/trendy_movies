@@ -4,10 +4,11 @@ import 'package:trendy_movies/src/application/localisation/keys.dart';
 import 'package:trendy_movies/src/application/utils/app_routes.dart';
 import 'package:trendy_movies/src/application/widgets/custom_divider.dart';
 import 'package:trendy_movies/src/domain/base_dependency_container.dart';
+import 'package:trendy_movies/src/presentation/home/logic/home_controller.dart';
 import 'package:trendy_movies/src/presentation/home/ui/trendy_movies_page.dart';
 import 'package:trendy_movies/src/presentation/user_profile/ui/user_avatar.dart';
 
-class HomeScreen extends GetResponsiveWidget with BaseToolBox {
+class HomeScreen extends GetResponsiveWidget<HomeController> with BaseToolBox {
   HomeScreen({Key? key}) : super(key: key);
   @override
   Widget? phone() {

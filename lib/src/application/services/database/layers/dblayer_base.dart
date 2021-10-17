@@ -13,6 +13,7 @@ abstract class DBLayer<T> with BaseToolBox {
 
   Future<void> close() {
     isReady.value = false;
+
     return box.close();
   }
 
@@ -20,18 +21,13 @@ abstract class DBLayer<T> with BaseToolBox {
     return box.compact();
   }
 
-  Future<void> openBox(HiveAesCipher hiveAesCipher) async {
+  Future<void> openBox() async {
     try {
-      if (isGlobal) {
-        _box = await database.openGlobal<T>(
-          boxName,
-        );
-      } else {
-        _box = await database.openForCurrentUser<T>(
-          boxName,
-          cipher: hiveAesCipher,
-        );
-      }
+      _box = isGlobal
+          ? await database.openGlobal<T>(boxName)
+          : await database.openForCurrentUser<T>(
+              boxName,
+            );
       isReady.value = _box != null;
       logger.debug('DBLayer: ${runtimeType.toString()} : $boxName opened');
     } catch (e, s) {
@@ -42,6 +38,7 @@ abstract class DBLayer<T> with BaseToolBox {
         isFatalError: true,
       );
     }
+
     return;
   }
 
@@ -60,7 +57,8 @@ void registerAdapter<X>(FactoryFunc<TypeAdapter<X>> adapter) {
   if (!Hive.isAdapterRegistered(_adapter.typeId)) {
     Hive.registerAdapter<X>(_adapter);
     di.logger.debug(
-        'Adapter Registered => ${X.runtimeType} == ${adapter.runtimeType}');
+      'Adapter Registered => ${X.runtimeType} == ${adapter.runtimeType}',
+    );
   } else {
     di.logger
         .debug('Adapter already registered => ${adapter.runtimeType} Skipped');

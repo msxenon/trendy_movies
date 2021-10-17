@@ -14,6 +14,7 @@ abstract class DatabaseService extends BaseService {
 
   @override
   void onClose() {
+    dbInitialized(false);
     closeDB();
     super.onClose();
   }

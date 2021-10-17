@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +15,7 @@ typedef FactoryFunc<T> = T Function();
 
 abstract class AppDatabaseService extends DatabaseService {
   @protected
-  final Set<DBLayer<dynamic>> dbLayers = {};
+  final Set<DBLayer<dynamic>> _dbLayers = {};
 
   static AppDatabaseService get() {
     return Get.find<AppDatabaseService>();
@@ -26,11 +23,13 @@ abstract class AppDatabaseService extends DatabaseService {
 
   @protected
   @mustCallSuper
-  void onAddDBLayer() {}
+  void addDBLayer(DBLayer<dynamic> dbLayer) {
+    _dbLayers.add(dbLayer);
+    logger.debug('Layer ${dbLayer.runtimeType} added');
+  }
 
   @override
   void onReady() {
-    onAddDBLayer();
     super.onReady();
     registerAdapters();
   }
@@ -40,11 +39,7 @@ abstract class AppDatabaseService extends DatabaseService {
     try {
       await Hive.close();
       await Hive.initFlutter(userid);
-
-      final decoded = base64Url.decode(userid);
-      final encryptionKey = decoded;
-
-      await _openEncryptedBoxes(encryptionKey);
+      await _openBoxes();
 
       dbInitialized(true);
     } catch (e, s) {
@@ -60,21 +55,17 @@ abstract class AppDatabaseService extends DatabaseService {
   @mustCallSuper
   @protected
   void registerAdapters() {
-    for (final layer in dbLayers) {
+    for (final layer in _dbLayers) {
       layer.registerLayerAdapters();
     }
   }
 
   @mustCallSuper
   @protected
-  Future<void> _openEncryptedBoxes(Uint8List? cipher) async {
-    if (cipher == null) {
-      throw Exception('db cipher is null');
-    }
-    logger.debug('Opening encrypted boxes');
-    final hiveCipher = HiveAesCipher(cipher);
-    for (final layer in dbLayers) {
-      await layer.openBox(hiveCipher);
+  Future<void> _openBoxes() async {
+    logger.debug('Opening DB boxes .. ${_dbLayers.length}');
+    for (final layer in _dbLayers) {
+      await layer.openBox();
     }
 
     return;
@@ -82,21 +73,20 @@ abstract class AppDatabaseService extends DatabaseService {
 
   @protected
   Future<void> compact() async {
-    for (final layer in dbLayers) {
+    for (final layer in _dbLayers) {
       await layer.compact();
     }
+
     return;
   }
 
   Future<Box<T>> openForCurrentUser<T>(
     String boxName, {
-    required HiveAesCipher cipher,
     bool deleteOnError = false,
   }) async {
     try {
       return await Hive.openBox<T>(
         boxName,
-        encryptionCipher: cipher,
         compactionStrategy: _compactionStrategy,
       );
     } catch (e, s) {
@@ -111,7 +101,6 @@ abstract class AppDatabaseService extends DatabaseService {
 
         return Hive.openBox<T>(
           boxName,
-          encryptionCipher: cipher,
           compactionStrategy: _compactionStrategy,
         );
       } else {
@@ -127,6 +116,7 @@ abstract class AppDatabaseService extends DatabaseService {
     try {
       final appDir = await getApplicationDocumentsDirectory();
       final String customPath = path_helper.join(appDir.path, boxName);
+
       return await Hive.openBox<T>(
         boxName,
         compactionStrategy: _compactionStrategy,
@@ -159,28 +149,33 @@ abstract class AppDatabaseService extends DatabaseService {
   @override
   Future<void> closeDB() async {
     await _closeBoxes();
+
     return;
   }
 
   Future<void> _closeBoxes() async {
     await compactBoxes();
     logger.debug('closing boxes');
-    final futures = dbLayers.map((e) => e.close());
+    final futures = _dbLayers.map((e) => e.close());
 
     await Future.wait<dynamic>(futures);
+
     return;
   }
 
   Future<void> compactBoxes() {
     logger.debug('compacting boxes');
 
-    final futures = dbLayers.map((e) => e.compact());
+    final futures = _dbLayers.map((e) => e.compact());
+
     return Future.wait(futures);
   }
 
   ///on db loading error
   @override
-  void showDbError(Object e, StackTrace s) {}
+  void showDbError(Object e, StackTrace s) {
+    return;
+  }
 
   @override
   void onClose() {

@@ -26,9 +26,16 @@ class TrendyMoviesPage extends GetResponsiveView<HomeController> {
         maxHeight: MediaQuery.of(Get.context!).size.width * 0.9,
         minWidth: MediaQuery.of(Get.context!).size.width * 0.8,
         minHeight: MediaQuery.of(Get.context!).size.width * 0.8,
-        cardBuilder: (context, index) => MovieCard(
-          item: controller.state![index],
-        ),
+        cardBuilder: (context, index) {
+          final movie = controller.state![index];
+
+          return MovieCard(
+            key: Key(
+              movie.id!.toString(),
+            ),
+            item: movie,
+          );
+        },
         swipeUpdateCallback: controller.cardDrag,
         swipeCompleteCallback: controller.setCurrentIndex,
       ),
@@ -49,9 +56,16 @@ class TrendyMoviesPage extends GetResponsiveView<HomeController> {
       maxHeight: minMaxSpace,
       minWidth: 100,
       minHeight: 100,
-      cardBuilder: (context, index) => MovieCard(
-        item: controller.state![index],
-      ),
+      cardBuilder: (context, index) {
+        final movie = controller.state![index];
+
+        return MovieCard(
+          key: Key(
+            movie.id!.toString(),
+          ),
+          item: movie,
+        );
+      },
       swipeUpdateCallback: controller.cardDrag,
       swipeCompleteCallback: controller.setCurrentIndex,
     );

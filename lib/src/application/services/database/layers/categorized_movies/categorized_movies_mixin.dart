@@ -5,19 +5,25 @@ import 'package:trendy_movies/src/application/services/database/layers/categoriz
 import 'package:trendy_movies/src/presentation/home/domain/entity/movie_model.dart';
 
 mixin CategorizedMoviesMixin on AppDatabaseService {
-  final categorizedMoviesDBLayer = CategorizedMoviesDBLayer();
   @override
-  void onAddDBLayer() {
-    dbLayers.add(categorizedMoviesDBLayer);
-    super.onAddDBLayer();
+  void onInit() {
+    addDBLayer(categorizedMoviesDBLayer);
+    super.onInit();
   }
 
-  void put({
+  final categorizedMoviesDBLayer = CategorizedMoviesDBLayer();
+  // @override
+  // void onAddDBLayer() {
+  //   dbLayers.add(categorizedMoviesDBLayer);
+  //   super.onAddDBLayer();
+  // }
+
+  Future<void> putCategorizedMovie({
     required Movie movie,
     required MovieCategory category,
-  }) {
+  }) async {
     final categorizedMovie = CategorizedMovie.fromMovie(movie, category);
-    categorizedMoviesDBLayer.box.put(
+    await categorizedMoviesDBLayer.box.put(
       categorizedMovie.id,
       categorizedMovie,
     );
