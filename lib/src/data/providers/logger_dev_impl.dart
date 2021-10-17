@@ -1,4 +1,5 @@
 import 'package:loggy/loggy.dart';
+import 'package:trendy_movies/src/application/utils/error_catcher/log_printer.dart';
 import 'package:trendy_movies/src/domain/providers/logger.dart';
 
 class LoggerDevImpl extends Logger {
@@ -6,10 +7,14 @@ class LoggerDevImpl extends Logger {
   @override
   void onInit() {
     Loggy.initLoggy(
-      hierarchicalLogging: true,
-      logPrinter: const PrettyPrinter(
-        showColors: true,
+      logOptions: const LogOptions(
+        LogLevel.all,
+        stackTraceLevel: LogLevel.all,
+        includeCallerInfo: true,
+        callerFrameDepthLevel: 10000000,
       ),
+      hierarchicalLogging: true,
+      logPrinter: const CustomLogPrinter(),
     );
   }
 

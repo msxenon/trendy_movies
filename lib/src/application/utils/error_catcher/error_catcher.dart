@@ -12,7 +12,7 @@ class ErrorCatcher {
   void _run(FutureFunction appRunner) {
     Chain.capture(
       () async {
-        appRunner();
+        await appRunner();
       },
       errorZone: true,
       onError: (error, stackChain) async {
@@ -29,13 +29,19 @@ class ErrorCatcher {
   void _initFlutterError() {
     // an internal FlutterError reporter that dumps to console
     FlutterError.onError = (FlutterErrorDetails details) async {
-      final stackTrace =
-          details.stack != null ? Chain.forTrace(details.stack!) : null;
+      final x = TextTreeRenderer(
+        wrapWidthProperties: 100,
+        maxDescendentsTruncatableNode: 5,
+      )
+          .render(
+            details.toDiagnosticsNode(style: DiagnosticsTreeStyle.error),
+          )
+          .trimRight();
 
       di.logger.error(
-        message: 'FlutterError ${details.summary}',
+        message: 'FlutterError $x',
         error: details.exception,
-        stackTrace: stackTrace,
+        stackTrace: details.stack,
         isFatalError: true,
       );
     };
