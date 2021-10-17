@@ -6,6 +6,7 @@ import 'package:trendy_movies/src/application/utils/app_routes.dart';
 import 'package:trendy_movies/src/application/widgets/custom_divider.dart';
 import 'package:trendy_movies/src/domain/base_dependency_container.dart';
 import 'package:trendy_movies/src/presentation/home/logic/home_controller.dart';
+import 'package:trendy_movies/src/presentation/home/ui/drawer_tile.dart';
 import 'package:trendy_movies/src/presentation/home/ui/trendy_movies_page.dart';
 import 'package:trendy_movies/src/presentation/movies_category/movies_category_controller.dart';
 import 'package:trendy_movies/src/presentation/user_profile/ui/user_avatar.dart';
@@ -77,22 +78,16 @@ class HomeScreen extends GetResponsiveWidget<HomeController> with BaseToolBox {
                   ),
                 ),
                 const CustomDivider(),
-                ListTile(
-                  leading: Icon(Icons.favorite),
-                  title: Text('Wishlist'),
-                  trailing: Obx(() => Text(wishes.items.length.toString())),
+                DrawerTile(
+                  Keys.Route_Titles_Wish_List.trans,
+                  MovieCategory.wishList,
                 ),
                 const CustomDivider(),
-                ListTile(
-                  leading: Icon(Icons.watch_later),
-                  title: Text('Watch Later'),
-                  trailing: Obx(() => Text(later.items.length.toString())),
-                ),
+                DrawerTile(Keys.Route_Titles_Seen.trans, MovieCategory.seen),
                 const CustomDivider(),
-                ListTile(
-                  leading: Icon(Icons.remove_red_eye_rounded),
-                  title: Text('Seen'),
-                  trailing: Obx(() => Text(seen.items.length.toString())),
+                DrawerTile(
+                  Keys.Route_Titles_Watch_Later.trans,
+                  MovieCategory.watchLater,
                 ),
               ],
             ),

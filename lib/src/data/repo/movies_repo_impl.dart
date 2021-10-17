@@ -8,6 +8,7 @@ class MoviesRepoImpl implements MoviesRepo {
   Future<List<Movie>> getMoviesFromRepo() async {
     final moviesList = await provider.getMoviesFromProviders();
     final finalList = moviesList.where((element) => element.isValid).toList();
+
     return finalList;
   }
 

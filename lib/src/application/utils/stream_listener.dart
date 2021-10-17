@@ -91,6 +91,7 @@ mixin StreamListener<I> on GetxController {
     if (!equals) {
       items.assignAll(rawData);
     }
+
     return;
   }
 }

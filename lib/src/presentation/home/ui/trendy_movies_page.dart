@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipecards/flutter_swipecards.dart';
 import 'package:get/get.dart';
+import 'package:trendy_movies/src/application/localisation/keys.dart';
 import 'package:trendy_movies/src/presentation/home/logic/home_controller.dart';
 import 'package:trendy_movies/src/presentation/home/ui/movie_card.dart';
 
@@ -81,7 +82,7 @@ class TrendyMoviesPage extends GetResponsiveView<HomeController> {
       },
       onEmpty: Center(
         child: Text(
-          'All is done, no New movies today, checkout tomorrow',
+          Keys.Labels_Empty_Check_Home.trans,
         ),
       ),
     );

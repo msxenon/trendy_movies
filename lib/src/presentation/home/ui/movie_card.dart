@@ -13,6 +13,9 @@ class MovieCard extends GetView<MovieCardController> {
           tag: item.id!.toString(),
         ),
         super(key: key);
+  static String getFullImageLink(String? path) {
+    return 'https://image.tmdb.org/t/p/original/$path';
+  }
 
   final Movie item;
   final MovieCardController _controller;
@@ -36,7 +39,7 @@ class MovieCard extends GetView<MovieCardController> {
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                    'https://image.tmdb.org/t/p/original/${item.posterPath}',
+                    getFullImageLink(item.posterPath),
                   ),
                 ),
               ),

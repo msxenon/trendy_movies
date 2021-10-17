@@ -34,8 +34,11 @@ class HomeController extends GetxController
           )
           .toList();
 
-      super.change(newCalculatedState,
-          status: newCalculatedState.isEmpty ? RxStatus.empty() : status);
+      super.change(
+        newCalculatedState,
+        status: newCalculatedState.isEmpty ? RxStatus.empty() : status,
+      );
+
       return;
     }
 
