@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:trendy_movies/src/application/models/movie_category.dart';
+import 'package:trendy_movies/src/application/utils/nav_utils.dart';
+import 'package:trendy_movies/src/presentation/home/domain/entity/movie_model.dart';
 import 'package:trendy_movies/src/presentation/home/ui/movie_card.dart';
 
 import 'movies_category_controller.dart';
@@ -30,21 +32,28 @@ class CategoryListScreen extends GetView<MoviesCategoryController> {
               final item = controller.items[index];
 
               return Card(
-                child: GridTile(
-                  footer: Container(
-                    padding: const EdgeInsets.all(10),
-                    color: Theme.of(context)
-                        .scaffoldBackgroundColor
-                        .withOpacity(0.7),
-                    child: Text(
-                      item.name,
-                      maxLines: 2,
+                child: InkWell(
+                  onTap: () => openMovieDetails(
+                    Movie.fromCategorizedMovie(
+                      item,
                     ),
                   ),
-                  child: Image.network(
-                    MovieCard.getFullImageLink(item.posterPath),
-                    fit: BoxFit.cover,
-                  ), //just for testing, will fill with image later
+                  child: GridTile(
+                    footer: Container(
+                      padding: const EdgeInsets.all(10),
+                      color: Theme.of(context)
+                          .scaffoldBackgroundColor
+                          .withOpacity(0.7),
+                      child: Text(
+                        item.name,
+                        maxLines: 2,
+                      ),
+                    ),
+                    child: Image.network(
+                      MovieCard.getFullImageLink(item.posterPath),
+                      fit: BoxFit.cover,
+                    ), //just for testing, will fill with image later
+                  ),
                 ),
               );
             },

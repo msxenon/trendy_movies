@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:trendy_movies/src/application/localisation/keys.dart';
@@ -21,7 +23,7 @@ class UserProfileBody extends GetView<UserProfileController> {
                 alignment: Alignment.center,
                 child: UserAvatar(
                   clickable: false,
-                  size: Get.width / 2,
+                  size: min(Get.width / 2, 200),
                 ),
               ),
               ListTile(

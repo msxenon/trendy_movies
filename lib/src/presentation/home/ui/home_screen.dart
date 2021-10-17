@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:trendy_movies/src/application/localisation/keys.dart';
 import 'package:trendy_movies/src/application/models/movie_category.dart';
-import 'package:trendy_movies/src/application/utils/app_routes.dart';
 import 'package:trendy_movies/src/application/widgets/custom_divider.dart';
 import 'package:trendy_movies/src/domain/base_dependency_container.dart';
 import 'package:trendy_movies/src/presentation/home/logic/home_controller.dart';
@@ -38,16 +37,8 @@ class HomeScreen extends GetResponsiveWidget<HomeController> with BaseToolBox {
             ),
           ),
         ),
-        actions: [
-          Container(
-            alignment: Alignment.center,
-            child: InkWell(
-              child: const UserAvatar(),
-              onTap: () => Get.toNamed<void>(AppRoutes.userProfile),
-            ),
-          ),
-        ],
       ),
+      drawer: _drawer(),
       body: TrendyMoviesPage(),
     );
   }
@@ -57,42 +48,45 @@ class HomeScreen extends GetResponsiveWidget<HomeController> with BaseToolBox {
     return Scaffold(
       body: Row(
         children: [
-          Drawer(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              children: [
-                const UserAvatar(),
-                const SizedBox(
-                  height: 20,
+          _drawer(),
+          Expanded(child: TrendyMoviesPage()),
+        ],
+      ),
+    );
+  }
+
+  Widget _drawer() {
+    return Drawer(
+      child: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        children: [
+          const UserAvatar(),
+          const SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Obx(
+              () => Text(
+                Keys.App_Welcome_User_Name.transArgs(
+                  <String, dynamic>{
+                    'name': authService.signedInUserModel.value.displayName,
+                  },
                 ),
-                Center(
-                  child: Obx(
-                    () => Text(
-                      Keys.App_Welcome_User_Name.transArgs(
-                        <String, dynamic>{
-                          'name':
-                              authService.signedInUserModel.value.displayName,
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-                const CustomDivider(),
-                DrawerTile(
-                  Keys.Route_Titles_Wish_List.trans,
-                  MovieCategory.wishList,
-                ),
-                const CustomDivider(),
-                DrawerTile(Keys.Route_Titles_Seen.trans, MovieCategory.seen),
-                const CustomDivider(),
-                DrawerTile(
-                  Keys.Route_Titles_Watch_Later.trans,
-                  MovieCategory.watchLater,
-                ),
-              ],
+              ),
             ),
           ),
-          Expanded(child: TrendyMoviesPage()),
+          const CustomDivider(),
+          DrawerTile(
+            Keys.Route_Titles_Wish_List.trans,
+            MovieCategory.wishList,
+          ),
+          const CustomDivider(),
+          DrawerTile(Keys.Route_Titles_Seen.trans, MovieCategory.seen),
+          const CustomDivider(),
+          DrawerTile(
+            Keys.Route_Titles_Watch_Later.trans,
+            MovieCategory.watchLater,
+          ),
         ],
       ),
     );

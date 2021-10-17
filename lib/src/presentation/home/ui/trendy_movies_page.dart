@@ -81,8 +81,13 @@ class TrendyMoviesPage extends GetResponsiveView<HomeController> {
         );
       },
       onEmpty: Center(
-        child: Text(
-          Keys.Labels_Empty_Check_Home.trans,
+        child: Padding(
+          padding: const EdgeInsets.all(
+            20,
+          ),
+          child: Text(
+            Keys.Labels_Empty_Check_Home.trans,
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:trendy_movies/src/application/models/categorized_movie.dart';
 
 part 'movie_model.freezed.dart';
 part 'movie_model.g.dart';
@@ -17,6 +18,13 @@ class Movie with _$Movie {
   }) = Data;
 
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
+  factory Movie.fromCategorizedMovie(
+    CategorizedMovie categorizedMovie,
+  ) {
+    return Movie.fromJson(
+      categorizedMovie.toJson(),
+    );
+  }
 }
 
 extension MovieExts on Movie {

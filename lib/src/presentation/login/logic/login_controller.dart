@@ -14,20 +14,27 @@ extension LoginViewStateExts on LoginViewState {
   bool get isResetPassword => this == LoginViewState.reset;
 }
 
-class LoginController extends GetxController with BaseToolBox {
-  final Rx<LoginViewState> viewState = LoginViewState.login.obs;
+class LoginController extends GetxController
+    with StateMixin<LoginViewState>, BaseToolBox {
   final TextEditingController emailController =
       TextEditingController(text: 'modi@modi-domain.com');
   final TextEditingController displayNameController = TextEditingController();
   final TextEditingController passwordController =
       TextEditingController(text: '12345678');
+  @override
+  void onInit() {
+    change(
+      LoginViewState.login,
+      status: RxStatus.success(),
+    );
+    super.onInit();
+  }
 
-  String get toggleText => viewState.value.isLogin
+  String get toggleText => state!.isLogin
       ? Keys.Actions_Q_Not_Registered_Yet.trans
       : Keys.Actions_Q_Already_Signed_Up.trans;
-  String get submitText => viewState.value.isLogin
-      ? Keys.Actions_Sign_In.trans
-      : Keys.Actions_Sign_Up.trans;
+  String get submitText =>
+      state!.isLogin ? Keys.Actions_Sign_In.trans : Keys.Actions_Sign_Up.trans;
   Future<AuthSignInResult> _signIn() async {
     update();
     if (!_validateLogin()) {
@@ -78,22 +85,30 @@ class LoginController extends GetxController with BaseToolBox {
   }
 
   void toggleLogin() {
-    if (viewState.value.isLogin) {
-      viewState(LoginViewState.register);
+    if (state!.isLogin) {
+      change(LoginViewState.register);
       setPageTitle(Keys.Actions_Sign_Up.trans);
     } else {
-      viewState(LoginViewState.login);
+      change(LoginViewState.login);
       setPageTitle(Keys.Actions_Sign_In.trans);
     }
     update();
   }
 
-  void submit() {
-    if (viewState.value.isLogin) {
-      _onSignIn();
+  Future<void> submit() async {
+    change(
+      state,
+      status: RxStatus.loading(),
+    );
+    if (state!.isLogin) {
+      await _onSignIn();
     } else {
-      _onRegisterWithAutoSignIn();
+      await _onRegisterWithAutoSignIn();
     }
+    change(
+      state,
+      status: RxStatus.success(),
+    );
   }
 
   void _onError(AuthRegisterError l) {

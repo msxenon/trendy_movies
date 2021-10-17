@@ -13,7 +13,7 @@ class UserAvatar extends StatelessWidget with BaseToolBox {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      constraints: const BoxConstraints(maxWidth: 300, maxHeight: 300),
+      // constraints: const BoxConstraints(maxWidth: 300, maxHeight: 300),
       child: InkWell(
         onTap:
             clickable ? () => Get.toNamed<void>(AppRoutes.userProfile) : null,

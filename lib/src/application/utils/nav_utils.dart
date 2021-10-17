@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:trendy_movies/src/application/utils/app_routes.dart';
 import 'package:trendy_movies/src/domain/base_dependency_container.dart';
+import 'package:trendy_movies/src/presentation/home/domain/entity/movie_model.dart';
+import 'package:trendy_movies/src/presentation/movie_details/ui/movie_details_screen.dart';
 
 void loadFromMainRoute() {
   if (Get.context != null) {
@@ -17,4 +19,13 @@ void continueAsLoggedIn() {
     }
     Get.offAllNamed<void>(AppRoutes.home);
   }
+}
+
+void openMovieDetails(Movie movie) {
+  Get.to<void>(
+    () => MovieDetailsScreen(
+      movie: movie,
+    ),
+    routeName: '${AppRoutes.movieDetails}/${movie.id}',
+  );
 }

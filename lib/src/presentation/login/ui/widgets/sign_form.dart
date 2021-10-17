@@ -12,7 +12,7 @@ class SignForm extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
+    return controller.obx((state) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         margin: const EdgeInsets.symmetric(horizontal: 10).copyWith(top: 20),
@@ -35,7 +35,7 @@ class SignForm extends GetView<LoginController> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          controller.viewState.value.isLogin
+          controller.state!.isLogin
               ? Keys.Actions_Sign_In.trans
               : Keys.Actions_Sign_Up.trans,
           style: Theme.of(Get.context!).textTheme.headline5,
@@ -49,7 +49,7 @@ class SignForm extends GetView<LoginController> {
         ),
         const SubmitButton(),
         ToggleButton(
-          key: controller.viewState.value.isLogin
+          key: controller.state!.isLogin
               ? Key(Keys.Actions_Sign_In.trans)
               : Key(Keys.Actions_Sign_Up.trans),
         ),
@@ -59,7 +59,7 @@ class SignForm extends GetView<LoginController> {
 
   List<Widget> _textFields() {
     return [
-      if (controller.viewState.value.isRegister)
+      if (controller.state!.isRegister)
         TextField(
           autofillHints: const [AutofillHints.name],
           keyboardType: TextInputType.name,
