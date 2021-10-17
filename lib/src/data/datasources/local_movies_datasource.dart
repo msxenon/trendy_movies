@@ -3,7 +3,7 @@ import 'package:trendy_movies/src/presentation/home/domain/entity/movie_model.da
 
 class LocalMoviesDataSource implements MoviesDataSource {
   @override
-  Future<List<Movie>> getMovies() async {
+  Future<List<Movie>> getMoviesFromDataSource() async {
     return [];
   }
 }

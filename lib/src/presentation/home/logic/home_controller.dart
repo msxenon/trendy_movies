@@ -11,11 +11,35 @@ class HomeController extends GetxController
     with StateMixin<List<Movie>>, BaseToolBox {
   final RxInt index = 0.obs;
   MoviesRepo get moviesRepo => Get.find();
+  List<int> getSkippedMoviesIds() {
+    return database.categorizedMoviesDBLayer.box.values
+        .map((e) => e.id)
+        .toList();
+  }
+
   @override
   void onInit() {
     super.onInit();
     //Loading, Success, Error handle with 1 line of code
-    append(() => moviesRepo.getMovies);
+    append(() => moviesRepo.getMoviesFromRepo);
+  }
+
+  @override
+  void change(List<Movie>? newState, {RxStatus? status}) {
+    if (newState != null && status?.isSuccess == true) {
+      final skippedIds = getSkippedMoviesIds();
+      final List<Movie> newCalculatedState = newState
+          .where(
+            (element) => !skippedIds.contains(element.id),
+          )
+          .toList();
+
+      super.change(newCalculatedState,
+          status: newCalculatedState.isEmpty ? RxStatus.empty() : status);
+      return;
+    }
+
+    super.change(newState, status: status);
   }
 
   void setCurrentIndex(CardSwipeOrientation orientation, int _index) {
@@ -95,6 +119,7 @@ class HomeController extends GetxController
   Future<void> _saveCategorizedMovie(int index) async {
     try {
       final movie = state![index];
+
       await database.putCategorizedMovie(
         movie: movie,
         category: getCurrentMovieCard(index)!.state.value!,

@@ -73,10 +73,17 @@ class TrendyMoviesPage extends GetResponsiveView<HomeController> {
 
   @override
   Widget? builder() {
-    return controller.obx((state) {
-      return Center(
-        child: screen.isPhone ? phone()! : desktop()!,
-      );
-    });
+    return controller.obx(
+      (state) {
+        return Center(
+          child: screen.isPhone ? phone()! : desktop()!,
+        );
+      },
+      onEmpty: Center(
+        child: Text(
+          'All is done, no New movies today, checkout tomorrow',
+        ),
+      ),
+    );
   }
 }

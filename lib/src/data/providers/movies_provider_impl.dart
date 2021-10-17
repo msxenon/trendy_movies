@@ -7,10 +7,10 @@ import 'package:trendy_movies/src/presentation/home/domain/entity/movie_model.da
 
 class MoviesProviderImpl implements MoviesProvider {
   @override
-  Future<List<Movie>> getMovies() async {
-    return remoteDataSource
-        .getMovies()
-        .onError((error, stackTrace) => localDataSource.getMovies());
+  Future<List<Movie>> getMoviesFromProviders() async {
+    return remoteDataSource.getMoviesFromDataSource().onError(
+          (error, stackTrace) => localDataSource.getMoviesFromDataSource(),
+        );
   }
 
   @override

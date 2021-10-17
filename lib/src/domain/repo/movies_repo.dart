@@ -5,9 +5,5 @@ abstract class MoviesRepo {
   final MoviesProvider provider;
 
   MoviesRepo(this.provider);
-  Future<List<Movie>> getMovies() async {
-    final moviesList = await provider.getMovies();
-
-    return moviesList.where((element) => element.isValid).toList();
-  }
+  Future<List<Movie>> getMoviesFromRepo();
 }

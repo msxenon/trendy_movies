@@ -20,6 +20,5 @@ class Movie with _$Movie {
 }
 
 extension MovieExts on Movie {
-  bool get isValid =>
-      id != null && name != null && posterPath != null && posterPath != null;
+  bool get isValid => id != null && name != null && posterPath != null;
 }

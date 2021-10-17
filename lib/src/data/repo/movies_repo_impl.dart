@@ -5,8 +5,10 @@ import 'package:trendy_movies/src/presentation/home/domain/entity/movie_model.da
 
 class MoviesRepoImpl implements MoviesRepo {
   @override
-  Future<List<Movie>> getMovies() async {
-    return provider.getMovies();
+  Future<List<Movie>> getMoviesFromRepo() async {
+    final moviesList = await provider.getMoviesFromProviders();
+    final finalList = moviesList.where((element) => element.isValid).toList();
+    return finalList;
   }
 
   @override

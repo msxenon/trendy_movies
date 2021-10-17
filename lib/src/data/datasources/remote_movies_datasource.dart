@@ -6,7 +6,7 @@ class RemoteMoviesDataSource implements MoviesDataSource {
   static final MoviesApiClient _apiClient = MoviesApiClient();
 
   @override
-  Future<List<Movie>> getMovies() async {
+  Future<List<Movie>> getMoviesFromDataSource() async {
     final response = await _apiClient.getTodayTrendingMovies();
 
     return response.results;

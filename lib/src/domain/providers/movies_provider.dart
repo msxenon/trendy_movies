@@ -10,5 +10,5 @@ abstract class MoviesProvider {
   final MoviesDataSource localDataSource;
   final MoviesDataSource remoteDataSource;
 
-  Future<List<Movie>> getMovies();
+  Future<List<Movie>> getMoviesFromProviders();
 }
