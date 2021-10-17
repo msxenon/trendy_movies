@@ -87,7 +87,7 @@ class SignForm extends GetView<LoginController> {
           hintText: Keys.User_Password.trans,
           errorText: controller.validatePassword(),
         ),
-      )
+      ),
     ];
   }
 }
