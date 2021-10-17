@@ -26,15 +26,6 @@ class UserProfileBody extends GetView<UserProfileController> {
               ),
               ListTile(
                 title: TextField(
-                  enabled: false,
-                  controller: TextEditingController(text: 'e@e.com'),
-                  decoration: InputDecoration(
-                    hintText: Keys.User_Email.trans,
-                  ),
-                ),
-              ),
-              ListTile(
-                title: TextField(
                   controller: controller.displayNameController,
                   decoration: InputDecoration(
                     hintText: Keys.User_Display_Name.trans,

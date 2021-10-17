@@ -56,12 +56,9 @@ mixin StreamListener<I> on GetxController {
       });
     }
 
-    final bool streamIsEmpty;
-    if (_streamListener.hasValue) {
-      streamIsEmpty = _streamListener.value.isEmpty;
-    } else {
-      streamIsEmpty = false;
-    }
+    final bool streamIsEmpty =
+        _streamListener.hasValue ? _streamListener.value.isEmpty : false;
+
     if (streamIsEmpty) {
       await onStartEmpty();
     }
