@@ -10,13 +10,15 @@ class LoginScreen extends GetResponsiveView<LoginController> {
   bool get alwaysUseBuilder => true;
   @override
   Widget? phone() {
-    return Column(
-      children: const [
-        AppLogo(
-          showAppName: true,
-        ),
-        SignForm(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: const [
+          AppLogo(
+            showAppName: true,
+          ),
+          SignForm(),
+        ],
+      ),
     );
   }
 
@@ -24,10 +26,17 @@ class LoginScreen extends GetResponsiveView<LoginController> {
   Widget? desktop() {
     return Row(
       children: const [
-        AppLogo(
-          showAppName: true,
+        Expanded(
+          child: AppLogo(
+            showAppName: true,
+          ),
         ),
-        SignForm(),
+        Flexible(
+          child: SignForm(),
+        ),
+        SizedBox(
+          width: 20,
+        ),
       ],
     );
   }
@@ -35,12 +44,10 @@ class LoginScreen extends GetResponsiveView<LoginController> {
   @override
   Widget? builder() {
     return Scaffold(
-      body: GetBuilder<LoginController>(
-        builder: (controller) => Center(
-          child: SingleChildScrollView(
-            child: AutofillGroup(
-              child: screen.isDesktop ? desktop()! : phone()!,
-            ),
+      body: SafeArea(
+        child: Center(
+          child: AutofillGroup(
+            child: screen.isDesktop ? desktop()! : phone()!,
           ),
         ),
       ),

@@ -15,6 +15,7 @@ class AppLogo extends StatelessWidget {
     return !showAppName
         ? imageLogo
         : Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               imageLogo,
               const SizedBox(
