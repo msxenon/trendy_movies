@@ -3,8 +3,8 @@ import 'package:flutter_swipecards/flutter_swipecards.dart';
 import 'package:get/get.dart';
 import 'package:trendy_movies/src/application/models/movie_category.dart';
 import 'package:trendy_movies/src/domain/base_dependency_container.dart';
+import 'package:trendy_movies/src/domain/entities/movie_model.dart';
 import 'package:trendy_movies/src/domain/repo/movies_repo.dart';
-import 'package:trendy_movies/src/presentation/home/domain/entity/movie_model.dart';
 import 'package:trendy_movies/src/presentation/home/logic/movie_card_controller.dart';
 
 class HomeController extends GetxController

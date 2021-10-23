@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:trendy_movies/src/application/models/movie_category.dart';
 import 'package:trendy_movies/src/application/services/database/hive_adapters_ids.dart';
-import 'package:trendy_movies/src/presentation/home/domain/entity/movie_model.dart';
+import 'package:trendy_movies/src/domain/entities/movie_model.dart';
 
 part 'categorized_movie.freezed.dart';
 part 'categorized_movie.g.dart';

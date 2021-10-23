@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:trendy_movies/src/presentation/home/domain/entity/movie_model.dart';
+import 'package:trendy_movies/src/domain/entities/movie_model.dart';
 import 'package:trendy_movies/src/presentation/home/logic/home_controller.dart';
 import 'package:trendy_movies/src/presentation/home/ui/movie_card.dart';
 

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:trendy_movies/src/domain/entities/movies_page_model.dart';
 import 'package:trendy_movies/src/domain/network/movies_http_client.dart';
-import 'package:trendy_movies/src/presentation/home/domain/entity/movies_page_model.dart';
 
 part 'movies_api.g.dart';
 
