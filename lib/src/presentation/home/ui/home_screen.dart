@@ -57,37 +57,39 @@ class HomeScreen extends GetResponsiveWidget<HomeController> with BaseToolBox {
 
   Widget _drawer() {
     return Drawer(
-      child: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        children: [
-          const UserAvatar(),
-          const SizedBox(
-            height: 20,
-          ),
-          Center(
-            child: Obx(
-              () => Text(
-                Keys.App_Welcome_User_Name.transArgs(
-                  <String, dynamic>{
-                    'name': authService.signedInUserModel.value.displayName,
-                  },
+      child: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          children: [
+            const UserAvatar(),
+            const SizedBox(
+              height: 20,
+            ),
+            Center(
+              child: Obx(
+                () => Text(
+                  Keys.App_Welcome_User_Name.transArgs(
+                    <String, dynamic>{
+                      'name': authService.signedInUserModel.value.displayName,
+                    },
+                  ),
                 ),
               ),
             ),
-          ),
-          const CustomDivider(),
-          DrawerTile(
-            Keys.Route_Titles_Wish_List.trans,
-            MovieCategory.wishList,
-          ),
-          const CustomDivider(),
-          DrawerTile(Keys.Route_Titles_Seen.trans, MovieCategory.seen),
-          const CustomDivider(),
-          DrawerTile(
-            Keys.Route_Titles_Watch_Later.trans,
-            MovieCategory.watchLater,
-          ),
-        ],
+            const CustomDivider(),
+            DrawerTile(
+              Keys.Route_Titles_Wish_List.trans,
+              MovieCategory.wishList,
+            ),
+            const CustomDivider(),
+            DrawerTile(Keys.Route_Titles_Seen.trans, MovieCategory.seen),
+            const CustomDivider(),
+            DrawerTile(
+              Keys.Route_Titles_Watch_Later.trans,
+              MovieCategory.watchLater,
+            ),
+          ],
+        ),
       ),
     );
   }
