@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path/path.dart' if (dart.library.html) 'src/stub/path.dart'
-    as path_helper;
-import 'package:path_provider/path_provider.dart'
-    if (dart.library.html) 'src/stub/path_provider.dart';
 import 'package:trendy_movies/src/application/services/database/layers/dblayer_base.dart';
+import 'package:trendy_movies/src/application/utils/file_utils/file_utils_io.dart'
+    if (dart.library.html) 'package:trendy_movies/src/application/utils/file_utils/file_utils_web.dart';
 import 'package:trendy_movies/src/domain/services/base_database_service.dart';
 
 typedef FactoryFunc<T> = T Function();
@@ -114,13 +112,12 @@ abstract class AppDatabaseService extends DatabaseService {
     bool deleteOnError = true,
   }) async {
     try {
-      final appDir = await getApplicationDocumentsDirectory();
-      final String customPath = path_helper.join(appDir.path, boxName);
+      final boxDir = await FileUtils().joinDirName(boxName);
 
       return await Hive.openBox<T>(
         boxName,
         compactionStrategy: _compactionStrategy,
-        path: customPath,
+        path: boxDir,
       );
     } catch (e, s) {
       logger.error(
