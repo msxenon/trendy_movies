@@ -105,6 +105,7 @@ class LoginController extends GetxController
     } else {
       await _onRegisterWithAutoSignIn();
     }
+    await Future<void>.delayed(const Duration(milliseconds: 500));
     change(
       state,
       status: RxStatus.success(),
